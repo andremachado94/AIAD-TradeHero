@@ -2,6 +2,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -21,7 +22,14 @@ public class Player extends  jade.core.Agent {
 
 
     private AID[] investorAgents;
-    private ArrayList<AID> following;
+    private ArrayList<AID> following = new ArrayList<AID>();
+
+    private PlayerPortfolio portfolio = new PlayerPortfolio();
+
+    private MessageTemplate mt=null; // The template to receive replies
+    private int step = 0;
+
+    private double n=0;
 
 
     public void setup() {
@@ -59,10 +67,140 @@ public class Player extends  jade.core.Agent {
             fe.printStackTrace();
         }
 
-       // addBehaviour(new Investor.dataReceiver());
+        Object[] args = getArguments();
+        n = Double.parseDouble(args[0].toString());
+
+        addBehaviour(new SuggestionReceiver());
+        addBehaviour(new TickerBehaviour(this, 1000) {
+            protected void onTick() {
+
+                switch (step) {
+                    case 0:
+                        // Request success rate to a random investor
+                        ACLMessage cfp = new ACLMessage(ACLMessage.REQUEST);
+                        //TODO
+                        cfp.addReceiver(investorAgents[0]);
+
+                        cfp.setContent("rate-request");
+                        cfp.setConversationId("rate-req");
+
+                        cfp.setReplyWith("ratereq" + System.currentTimeMillis()); // Unique value
+                        myAgent.send(cfp);
+                        // Prepare the template to get confirmations
+                        mt = MessageTemplate.and(MessageTemplate.MatchConversationId("rate-req"),
+                                MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
+                        step = 1;
+                        break;
+                    case 1:
+                        // Check if investor received the information
+                        ACLMessage reply = myAgent.receive(mt);
+                        if (reply != null) {
+                            // Reply received
+                            if (reply.getPerformative() == ACLMessage.INFORM && reply.getConversationId().equals("rate-req")) {
+                                double rate = Double.parseDouble(reply.getContent());
+                                if(rate > n){
+                                    if(!isFollowing(reply.getSender())){
+                                        step = 2;
+                                        System.out.println("\nSuccess rate de " + reply.getContent());
+                                    }
+                                    else{
+                                        step = 0;
+                                       // System.out.println("Já estou a seguir");
+                                    }
+
+                                }
+                                else{
+                                    if(isFollowing(reply.getSender())) {
+                                        step = 3;
+                                        System.out.println("\nSuccess rate de " + reply.getContent());
+                                    }
+                                    else{
+                                        step = 0;
+                                       // System.out.println("Não sigo nem tenho interesse");
+                                    }
+                                }
+                            }
+                        } else {
+                            block();
+                        }
+                        break;
+                    case 2:
+                        ACLMessage cfp3 = new ACLMessage(ACLMessage.REQUEST);
+                        //TODO
+                        cfp3.addReceiver(investorAgents[0]);
+
+                        cfp3.setContent("follow-request");
+                        cfp3.setConversationId("follow-req");
+
+                        cfp3.setReplyWith("followreq" + System.currentTimeMillis()); // Unique value
+                        myAgent.send(cfp3);
+                        // Prepare the template to get confirmations
+                        mt = MessageTemplate.and(MessageTemplate.MatchConversationId("follow-req"),
+                                MessageTemplate.MatchInReplyTo(cfp3.getReplyWith()));
+
+                        System.out.println(myAgent.getName() + ": Hey, quero seguir-te");
+
+                        //TODO
+                        follow(investorAgents[0]);
+
+                        step = 0;
+
+                        break;
+                    case 3:
+                        ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
+                        //TODO
+                        cfp2.addReceiver(investorAgents[0]);
+
+                        cfp2.setContent("unfollow-request");
+                        cfp2.setConversationId("unfollow-req");
+
+                        cfp2.setReplyWith("unfollowreq" + System.currentTimeMillis()); // Unique value
+                        myAgent.send(cfp2);
+                        // Prepare the template to get confirmations
+                        mt = MessageTemplate.and(MessageTemplate.MatchConversationId("unfollow-req"),
+                                MessageTemplate.MatchInReplyTo(cfp2.getReplyWith()));
+
+                        System.out.println(myAgent.getName() + ": Hey, cheiras mal e já não gosto de ti");
+
+                        //TODO
+                        unfollow(investorAgents[0]);
+                        step = 0;
+                        break;
+                }
+            }
+        });
+
 
     }
 
+    private class SuggestionReceiver extends CyclicBehaviour {
+        public void action() {
+            MessageTemplate templ = MessageTemplate.and(MessageTemplate.MatchConversationId("invSug"),
+                                                        MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+            ACLMessage msg = myAgent.receive(templ);
+            if (msg != null) {
+                // INFORM Message received. Process it
+                String[] info = msg.getContent().split(",");
+                if(info.length == 4){
+                    if(info[0].equals("buy")){
+
+                    }
+                    else if(info[0].equals("sell")){
+
+                    }
+                    else{
+                        System.out.println("Invalid Suggestion msg - 1");
+                    }
+                }
+                else{
+                    System.out.println("Invalid Suggestion msg - 2");
+                }
+
+            } else {
+                block();
+            }
+        }
+    }
 
     public void takeDown() {
         try {
@@ -74,13 +212,15 @@ public class Player extends  jade.core.Agent {
         System.out.println("Player " + getAID().getName() + " terminating.");
     }
 
+/*
+    private class InvestorCommunication extends TickerBehaviour {
 
-    private class investorCommunication extends CyclicBehaviour {
 
-        private MessageTemplate mt; // The template to receive replies
-        private int step = 0;
+        public void onTick() {
 
-        public void action() {
+            MessageTemplate mt; // The template to receive replies
+            int step = 0;
+
             switch (step) {
                 case 0:
                     // Request success rate to a random investor
@@ -103,75 +243,31 @@ public class Player extends  jade.core.Agent {
                     ACLMessage reply = myAgent.receive(mt);
                     if (reply != null) {
                         // Reply received
-                        if (reply.getPerformative() == ACLMessage.AGREE) {
+                        if (reply.getPerformative() == ACLMessage.INFORM && reply.getConversationId().equals("rate-req")) {
                             double rate = Double.parseDouble(reply.getContent());
-                            if(rate > 0){
-                                if(ifFollowing(reply.getSender())){
-                                    //TODO REQUEST Portfolio
+                            if(rate > 0.5){
+                                if(!isFollowing(reply.getSender()))
                                     step = 2;
+                                else{
+                                    step = 0;
+                                    System.out.println("Já estou a seguir");
                                 }
-                                else {
-                                    //TODO follow
-                                    step = 4;
-                                }
+
                             }
                             else{
-                                if(ifFollowing(reply.getSender())){
-                                    //TODO unfollow
-                                    step = 6;
-                                }
-                                else {
-                                    //TODO
+                                if(isFollowing(reply.getSender()))
+                                    step = 3;
+                                else{
                                     step = 0;
+                                    System.out.println("Não sigo nem tenho interesse");
                                 }
                             }
-                        }
-                        else if(reply.getPerformative() == ACLMessage.REFUSE){
-                            //TODO
-                            step = 0;
                         }
                     } else {
                         block();
                     }
                     break;
                 case 2:
-                    ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
-                    //TODO
-                    cfp2.addReceiver(investorAgents[0]);
-
-                    cfp2.setContent("portfolio-request");
-                    cfp2.setConversationId("portfolio-req");
-
-                    cfp2.setReplyWith("portreq" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp2);
-                    // Prepare the template to get confirmations
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("portfolio-req"),
-                            MessageTemplate.MatchInReplyTo(cfp2.getReplyWith()));
-
-                    step = 3;
-
-                    break;
-
-                case 3:
-                    // Check if investor received the information
-                    ACLMessage reply2 = myAgent.receive(mt);
-                    if (reply2 != null) {
-                        // Reply received
-                        if (reply2.getPerformative() == ACLMessage.AGREE) {
-                            String info = reply2.getContent();
-                            //TODO Process info received
-                            step = 4;
-
-                        }
-                        else if(reply2.getPerformative() == ACLMessage.REFUSE){
-                            //TODO
-                            step = 0;
-                        }
-                    } else {
-                        block();
-                    }
-                    break;
-                case 4:
                     ACLMessage cfp3 = new ACLMessage(ACLMessage.REQUEST);
                     //TODO
                     cfp3.addReceiver(investorAgents[0]);
@@ -185,53 +281,41 @@ public class Player extends  jade.core.Agent {
                     mt = MessageTemplate.and(MessageTemplate.MatchConversationId("follow-req"),
                             MessageTemplate.MatchInReplyTo(cfp3.getReplyWith()));
 
-                    step = 5;
+                    System.out.println("Hey, quero seguir-te");
 
-                    break;
-                case 5:
-                    // Check if investor received the information
-                    ACLMessage reply3 = myAgent.receive(mt);
-                    if (reply3 != null) {
-                        // Reply received
-                        if (reply3.getPerformative() == ACLMessage.AGREE) {
-                            //TODO Add to follow
-                            step = 2;
-
-                        }
-                        else if(reply3.getPerformative() == ACLMessage.REFUSE){
-                            //TODO
-                            step = 0;
-                        }
-                    } else {
-                        block();
-                    }
-                    break;
-                case 6:
-                    ACLMessage cfp4 = new ACLMessage(ACLMessage.REQUEST);
                     //TODO
-                    cfp4.addReceiver(investorAgents[0]);
+                    follow(investorAgents[0]);
 
-                    cfp4.setContent("unfollow-request");
-                    cfp4.setConversationId("unfollow-req");
+                    step = 0;
 
-                    cfp4.setReplyWith("unfreq" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp4);
+                    break;
+                case 3:
+                    ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
+                    //TODO
+                    cfp2.addReceiver(investorAgents[0]);
+
+                    cfp2.setContent("unfollow-request");
+                    cfp2.setConversationId("unfollow-req");
+
+                    cfp2.setReplyWith("unfollowreq" + System.currentTimeMillis()); // Unique value
+                    myAgent.send(cfp2);
                     // Prepare the template to get confirmations
                     mt = MessageTemplate.and(MessageTemplate.MatchConversationId("unfollow-req"),
-                            MessageTemplate.MatchInReplyTo(cfp4.getReplyWith()));
+                            MessageTemplate.MatchInReplyTo(cfp2.getReplyWith()));
 
-                    //TODO UNFOLLOW
+                    System.out.println("Hey, cheiras mal e já não gosto de ti");
 
-                    step = 3;
-
+                    //TODO
+                    unfollow(investorAgents[0]);
+                    step = 0;
                     break;
             }
         }
     }
-
-    private boolean ifFollowing(AID sender) {
+*/
+    private boolean isFollowing(AID sender) {
         for (int i = 0 ; i < following.size() ; i++){
-            if(following.get(i) == sender)
+            if(following.get(i).equals(sender))
                 return true;
         }
         return false;
@@ -239,7 +323,7 @@ public class Player extends  jade.core.Agent {
 
     private void follow(AID sender){
         for (int i = 0 ; i < following.size() ; i++){
-            if(following.get(i) == sender)
+            if(following.get(i).equals(sender))
                 return;
         }
         following.add(sender);
@@ -247,7 +331,7 @@ public class Player extends  jade.core.Agent {
 
     private void unfollow(AID sender){
         for (int i = 0 ; i < following.size() ; i++){
-            if(following.get(i) == sender){
+            if(following.get(i).equals(sender)){
                 following.remove(i);
                 return;
             }

@@ -28,7 +28,7 @@ public class Informer extends jade.core.Agent {
 
 
     private ArrayList<AID> investorAgents;
-    private AID[] playerAgents;
+    //private AID[] playerAgents;
 
 
     public void setup(){

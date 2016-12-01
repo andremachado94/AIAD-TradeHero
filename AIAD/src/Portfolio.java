@@ -50,10 +50,11 @@ public class Portfolio extends Investment{
             double earnings = activeShares.get(company.getCompanyId()).getShareCurrentCost() * amount;
             if(activeShares.get(company.getCompanyId()).getAmount() == amount) {
                 //Remove from active
+                activeShares.get(company.getCompanyId()).sell(date);
                 soldShares.add(activeShares.get(company.getCompanyId()));
                 activeShares.remove(company.getCompanyId());
                // System.out.println("Sold 50 shares from " + company.getCompanyId() + " @" + date);
-               // activeShares.get(company.getCompanyId()).sell(activeShares.get(company.getCompanyId()));
+
             }
             else{
                 //TODO

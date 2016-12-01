@@ -2,6 +2,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -19,6 +20,9 @@ import java.util.*;
 public class Investor extends jade.core.Agent {
 
     ArrayList<Company> companies;
+
+    private ArrayList<AID> followers = new ArrayList<AID>();
+
     private AID[] informerAgents;
     private boolean infoReceived = true;
     private Date currentDate;
@@ -63,7 +67,7 @@ public class Investor extends jade.core.Agent {
         createPortfolio();
 
         addBehaviour(new dataReceiver());
-
+        addBehaviour(new manageFollowers());
     }
 
     public void takeDown() {
@@ -76,6 +80,85 @@ public class Investor extends jade.core.Agent {
         System.out.println("Investor " + getAID().getName() + " terminating.");
     }
 
+    private class SuggestCompany extends OneShotBehaviour {
+
+        private String suggestion;
+
+        public SuggestCompany(String suggestion){
+            this.suggestion = suggestion;
+        }
+
+        public void action() {
+
+            //System.out.println("\n\n\n------------------------\nTrying to get company Info:\n------------------------\n\n");
+
+            // Send the information to all investors
+           // System.out.println(suggestion);
+
+            if(followers.size() > 0) {
+                //System.out.println(suggestion);
+                ACLMessage cfp = new ACLMessage(ACLMessage.INFORM);
+                for (int i = 0; i < followers.size(); ++i) {
+                    cfp.addReceiver(followers.get(i));
+                }
+
+                cfp.setContent(suggestion);
+                cfp.setConversationId("invSug");
+
+                cfp.setReplyWith("iS" + System.currentTimeMillis()); // Unique value
+                myAgent.send(cfp);
+            }
+
+        }
+    }
+
+    private class manageFollowers extends CyclicBehaviour {
+        public void action() {
+            MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
+            ACLMessage msg = myAgent.receive(mt);
+            if (msg != null && msg.getConversationId().equals("rate-req")) {
+                // INFORM Message received. Process it
+                String str = msg.getContent();
+                ACLMessage reply = msg.createReply();
+                reply.setPerformative(ACLMessage.INFORM);
+                reply.setContent("" + (portfolio.getPortfolioValue() + portfolio.getCurrentCapital())/1000000.0);
+
+                myAgent.send(reply);
+            }
+            else if (msg != null && msg.getConversationId().equals("follow-req")) {
+                // INFORM Message received. Process it
+                addFollower(msg.getSender());
+                //System.out.println(myAgent.getName() + " followers:");
+                //printFollowers();
+                // TODO Add to Followers
+            }
+            else if (msg != null && msg.getConversationId().equals("unfollow-req")) {
+
+                removeFollower(msg.getSender());
+                //System.out.println(myAgent.getName() + " followers:");
+                //printFollowers();
+                // TODO Remove from Followers
+            }else {
+                block();
+            }
+        }
+
+        private void addFollower(AID follower){
+            if(!followers.contains(follower))
+                followers.add(follower);
+        }
+
+        private void removeFollower(AID follower){
+            if(followers.contains(follower))
+                followers.remove(follower);
+        }
+
+        private void printFollowers(){
+            for(int i = 0 ; i < followers.size() ; i++){
+                System.out.println(followers.get(i).getName());
+            }
+        }
+    }
 
     private class dataReceiver extends CyclicBehaviour {
         public void action() {
@@ -92,7 +175,7 @@ public class Investor extends jade.core.Agent {
                     // Received the date
                     currentDate = processReceivedMessage(str);
                     portfolio.update();
-                    System.out.println(this.getAgent().getName() + ": Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+                  //  System.out.println(this.getAgent().getName() + ": Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);
                 } else {
@@ -142,6 +225,7 @@ public class Investor extends jade.core.Agent {
 
                 if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0 && portfolio.getCurrentCapital() > portfolio.getCurrentCapital()/100){
                     portfolio.buyShare(company, n, date);
+                    addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," +dateToString(date)  + "," + company.getLastClose()));
                     //System.out.println("Bought" + n + "shares from " + company.getCompanyId() + " @" + date);
                     return;
                 }
@@ -149,11 +233,11 @@ public class Investor extends jade.core.Agent {
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
                     portfolio.sellShare(company, n, date);
+                    addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," +dateToString(date)  + "," + company.getLastClose()));
                 }
 
         }
     }
-
 
     private Date stringToDate(String info) {
         String[] dateInfo = info.split("-");
@@ -164,7 +248,6 @@ public class Investor extends jade.core.Agent {
                 Integer.parseInt(dateInfo[2])
         ).getTime();
     }
-
 
     private String dateToString(Date date) {
         Calendar cal = Calendar.getInstance();

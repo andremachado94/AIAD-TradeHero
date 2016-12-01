@@ -9,6 +9,7 @@ public class Share {
 
     private boolean active;
     private Company company;
+    private String companyId;
     private int amount;
     private double boughtPrice;
     private double soldPrice;
@@ -28,6 +29,20 @@ public class Share {
         this.dateBought = date;
     }
 
+    public Share(String companyId, int amount, double sharePrice, Date date){
+        this.companyId = companyId;
+        this.amount = amount;
+        this.boughtPrice = sharePrice;
+        this.currentPrice = sharePrice;
+        this.active = true;
+
+        this.dateBought = date;
+    }
+
+
+    public void update(double price){
+        this.currentPrice = price;
+    }
 
     public void update(){
         this.currentPrice = company.getLastClose();
@@ -56,5 +71,21 @@ public class Share {
 
     public double getShareCurrentCost(){
         return currentPrice;
+    }
+
+    public Date getDateBought() {
+        return dateBought;
+    }
+
+    public Date getDateSold() {
+        return dateSold;
+    }
+
+    public double getSoldPrice() {
+        return soldPrice;
+    }
+
+    public double getBoughtPrice() {
+        return boughtPrice;
     }
 }
