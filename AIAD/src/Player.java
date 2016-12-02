@@ -1,16 +1,12 @@
 import jade.core.AID;
-import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
-import jade.domain.FIPANames;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.proto.SubscriptionInitiator;
 
 import java.util.*;
 
@@ -26,16 +22,10 @@ public class Player extends InvestorAgent {
 
     private PlayerPortfolio portfolio = new PlayerPortfolio();
 
-    private ArrayList<Double> currentCapitalHistory = new ArrayList<>();
-    private ArrayList<Double> portfolioValueHistory = new ArrayList<>();
-
     private MessageTemplate mt=null; // The template to receive replies
     private int step = 0;
 
-    private double n=0;
-    private double day = 0;
-
-    InvestmentChart chart;
+    private double trustLimit =0;
 
     boolean newDay = true;
 
@@ -79,7 +69,7 @@ public class Player extends InvestorAgent {
         }
 
         Object[] args = getArguments();
-        n = Double.parseDouble(args[0].toString());
+        trustLimit = Double.parseDouble(args[0].toString());
 
         addBehaviour(new dataReceiver());
         addBehaviour(new SuggestionReceiver());
@@ -112,7 +102,7 @@ public class Player extends InvestorAgent {
                             // Reply received
                             if (true) {
                                 double rate = Double.parseDouble(reply.getContent());
-                                if(rate > n){
+                                if(rate > trustLimit){
                                     if(!isFollowing(reply.getSender())){
                                         step = 2;
                                         System.out.println("\nSuccess rate de " + reply.getContent());
@@ -187,35 +177,6 @@ public class Player extends InvestorAgent {
 
     }
 
-    private void updateHistory(double currentCapital, double portfolioValue){
-        if(currentCapitalHistory.size() == 300){
-            currentCapitalHistory.remove(299);
-        }
-        if(portfolioValueHistory.size() == 300){
-            portfolioValueHistory.remove(299);
-        }
-
-        currentCapitalHistory.add(0,currentCapital);
-        portfolioValueHistory.add(0,portfolioValue);
-    }
-
-    public double getPortfolioValueHistoryMA(int num) {
-        int i;
-        double sum = 0;
-        for(i = 0 ; i < portfolioValueHistory.size() && i < num ; i++){
-            sum += portfolioValueHistory.get(i);
-        }
-        return sum/i;
-    }
-
-    public double getCurrentCapitalHistoryMA(int num) {
-        int i;
-        double sum = 0;
-        for(i = 0 ; i < currentCapitalHistory.size() && i < num ; i++){
-            sum += currentCapitalHistory.get(i);
-        }
-        return sum/i;
-    }
 
     private class SuggestionReceiver extends CyclicBehaviour {
         public void action() {
@@ -430,13 +391,4 @@ public class Player extends InvestorAgent {
         }
     }
 
-    private Date stringToDate(String info) {
-        String[] dateInfo = info.split("-");
-
-        return new GregorianCalendar(
-                Integer.parseInt(dateInfo[0]),
-                Integer.parseInt(dateInfo[1]),
-                Integer.parseInt(dateInfo[2])
-        ).getTime();
-    }
 }
