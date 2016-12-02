@@ -100,6 +100,7 @@ public class Investor extends InvestorAgent {
            // System.out.println(suggestion);
 
             if(followers.size() > 0) {
+                System.out.println("Suggesting a buy");
                 //System.out.println(suggestion);
                 ACLMessage cfp = new ACLMessage(ACLMessage.INFORM);
                 for (int i = 0; i < followers.size(); ++i) {
@@ -123,9 +124,10 @@ public class Investor extends InvestorAgent {
             if (msg != null && msg.getConversationId().equals("rate-req")) {
                 // INFORM Message received. Process it
                 //String str = msg.getContent();
+                System.out.println("RATE REQUESTED");
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.INFORM);
-                reply.setContent("" + (portfolio.getPortfolioValue() + portfolio.getCurrentCapital())/1000000.0);
+                reply.setContent("" + (portfolio.getPortfolioValue() + portfolio.getCurrentCapital())/portfolio.getInitialCapital());
 
                 myAgent.send(reply);
             }
@@ -232,9 +234,11 @@ public class Investor extends InvestorAgent {
 
                 if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0 && portfolio.getCurrentCapital() > portfolio.getCurrentCapital()/100){
                     portfolio.buyShare(company, n, date);
+                    //System.out.println("Suggesting a buy");
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
-                    System.out.println("\nBought" + n + "shares from " + company.getCompanyId() + " @" + date);
-                    System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+
+                    //System.out.println("\nBought" + n + "shares from " + company.getCompanyId() + " @" + date);
+                    //System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
 
                     return;
                 }
@@ -242,8 +246,8 @@ public class Investor extends InvestorAgent {
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
                     portfolio.sellShare(company, n, date);
-                    System.out.println("\nSold" + n + "shares from " + company.getCompanyId() + " @" + date);
-                    System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+                   // System.out.println("\nSold" + n + "shares from " + company.getCompanyId() + " @" + date);
+                    //System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
 
                     addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }

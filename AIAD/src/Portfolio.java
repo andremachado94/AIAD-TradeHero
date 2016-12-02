@@ -77,6 +77,10 @@ public class Portfolio extends Investment{
         return sum;
     }
 
+    public double getInitialCapital(){
+        return initialCapital;
+    }
+
 
 
 }

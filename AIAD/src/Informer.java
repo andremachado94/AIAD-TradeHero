@@ -77,7 +77,7 @@ public class Informer extends jade.core.Agent {
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
-/*
+
         DFAgentDescription template2 = new DFAgentDescription();
         ServiceDescription sd3 = new ServiceDescription();
         sd3.setType("player");
@@ -93,7 +93,7 @@ public class Informer extends jade.core.Agent {
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
-*/
+
         addBehaviour(new InformerAnnouncement());
 
     }
@@ -242,6 +242,8 @@ public class Informer extends jade.core.Agent {
                         if (reply != null) {
                             // Reply received
                             if (reply.getPerformative() == ACLMessage.CONFIRM) {
+
+                                //System.out.println("Received reply from " + reply.getSender().getName());
 
                                 for (int i = 0; i < investorAgents.size(); ++i) {
                                     if(investorAgents.get(i).equals(reply.getSender()) && reply.getContent().equals(dateToString(currentDate))){

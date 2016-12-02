@@ -30,8 +30,11 @@ public class Player extends InvestorAgent {
     private int step = 0;
 
     private double n=0;
+    private double day = 0;
 
     InvestmentChart chart;
+
+    boolean newDay = true;
 
     public void setup() {
 
@@ -75,8 +78,9 @@ public class Player extends InvestorAgent {
         Object[] args = getArguments();
         n = Double.parseDouble(args[0].toString());
 
+        addBehaviour(new dataReceiver());
         addBehaviour(new SuggestionReceiver());
-        addBehaviour(new TickerBehaviour(this, 1000) {
+        addBehaviour(new TickerBehaviour(this, 200) {
             protected void onTick() {
 
                 switch (step) {
@@ -86,6 +90,7 @@ public class Player extends InvestorAgent {
                         //TODO
                         cfp.addReceiver(investorAgents[0]);
 
+                        System.out.println("REQUESTING RATE");
                         cfp.setContent("rate-request");
                         cfp.setConversationId("rate-req");
 
@@ -98,10 +103,13 @@ public class Player extends InvestorAgent {
                         break;
                     case 1:
                         // Check if investor received the information
-                        ACLMessage reply = myAgent.receive(mt);
+                        MessageTemplate mm = MessageTemplate.and(MessageTemplate.MatchConversationId("rate-req"),
+                                MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+                        ACLMessage reply = myAgent.receive(mm);
                         if (reply != null) {
+                            System.out.println("RECEIVED RATE - " + reply.getContent());
                             // Reply received
-                            if (reply.getPerformative() == ACLMessage.INFORM && reply.getConversationId().equals("rate-req")) {
+                            if (true) {
                                 double rate = Double.parseDouble(reply.getContent());
                                 if(rate > n){
                                     if(!isFollowing(reply.getSender())){
@@ -180,31 +188,77 @@ public class Player extends InvestorAgent {
 
     private class SuggestionReceiver extends CyclicBehaviour {
         public void action() {
-            MessageTemplate templ = MessageTemplate.and(MessageTemplate.MatchConversationId("invSug"),
-                                                        MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+            if(newDay){
+                MessageTemplate templ = MessageTemplate.and(MessageTemplate.MatchConversationId("invSug"),
+                        MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+                ACLMessage msg = myAgent.receive(templ);
+                if (msg != null) {
+                    // INFORM Message received. Process it
+                    System.out.println("SUGGESTION RECEIVED");
+                    String[] info = msg.getContent().split(",");
+
+                    if (info.length == 4) {
+                        if (info[0].equals("buy")) {
+                            portfolio.buyShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
+                        } else if (info[0].equals("sell")) {
+                            portfolio.sellShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
+                        } else {
+                            System.out.println("Invalid Suggestion msg - 1");
+                        }
+                        System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
+                    } else {
+                        System.out.println("Invalid Suggestion msg - 2");
+                    }
+
+                } else {
+                    block();
+                }
+            }
+        }
+    }
+
+
+    private class dataReceiver extends CyclicBehaviour {
+        public void action() {
+            MessageTemplate templ = MessageTemplate.and(MessageTemplate.MatchConversationId("cmpData"),
+                    MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+
             ACLMessage msg = myAgent.receive(templ);
             if (msg != null) {
-                // INFORM Message received. Process it
-                String[] info = msg.getContent().split(",");
-                if(info.length == 4){
-                    if(info[0].equals("buy")){
-                        portfolio.buyShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
-                    }
-                    else if(info[0].equals("sell")){
-                        portfolio.sellShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
-                    }
-                    else{
-                        System.out.println("Invalid Suggestion msg - 1");
-                    }
-                    System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
-                }
-                else{
-                    System.out.println("Invalid Suggestion msg - 2");
-                }
+                // INFORM Message received. Process i
+                String str = msg.getContent();
+                ACLMessage reply = msg.createReply();
 
+
+                String[] data = str.split("/");
+
+                if (data[0] != null) {
+                    // Received the date
+                    update(data);
+                    chart.addData(day, portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
+                    day+=1;
+                    reply.setPerformative(ACLMessage.CONFIRM);
+                    reply.setContent(data[0]);
+
+                } else {
+                    System.out.println("Shit just got serious");
+                }
+                myAgent.send(reply);
             } else {
                 block();
             }
+        }
+
+        private void update(String data[]){
+                //key - 0
+                //close - 1
+            for(int i = 1 ; i < data.length ; i++){
+                String[] info = data[i].split(",");
+                //TODO Meter esta merda direito
+                if(info.length > 2)
+                     portfolio.update(info[0], Double.parseDouble(info[1]));
+            }
+
         }
     }
 

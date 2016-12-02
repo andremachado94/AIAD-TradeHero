@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public class PlayerPortfolio {
 
-    private static double initialCapital = 1000000.00;
+    private static double initialCapital = 1000.00;
 
     private static String currencyUsed = "USD";
     private double currentCapital;
@@ -23,6 +23,7 @@ public class PlayerPortfolio {
 
     public void buyShare(String cmpId, double price, Date date){
         int n = (int)((currentCapital/100)/price);
+        System.out.println("Buy " + cmpId);
 
         if(!activeShares.containsKey(cmpId)){
             if(n>0) {
@@ -33,7 +34,14 @@ public class PlayerPortfolio {
         }
     }
 
+    public void update(String key, double val){
+        if(activeShares.containsKey(key)) {
+            activeShares.get(key).update(val);
+        }
+    }
+
     public void sellShare(String cmpId, double price, Date date){
+        System.out.println("Sell " + cmpId);
         if(activeShares.containsKey(cmpId)){
             Share share = activeShares.get(cmpId);
             share.sell(date);
@@ -50,7 +58,11 @@ public class PlayerPortfolio {
         for (String key: activeShares.keySet()) {
             sum += activeShares.get(key).getShareCost();
         }
-        return sum+currentCapital;
+        return sum;
+    }
+
+    public double getCurrentCapital(){
+        return currentCapital;
     }
 
 
