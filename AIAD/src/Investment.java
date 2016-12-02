@@ -104,7 +104,7 @@ public class Investment {
 
         double relativeStrengthIndex = getRSI(company);
 
-        if(relativeStrengthIndex < 15){
+        if(relativeStrengthIndex < 35){
             double shareValue = company.getLastClose();
             return (int)(investMoney / shareValue);
 
@@ -117,7 +117,7 @@ public class Investment {
 
         double relativeStrengthIndex = getRSI(company);
 
-        if(relativeStrengthIndex > 75)
+        if(relativeStrengthIndex > 55)
             return true;
         else return false;
 

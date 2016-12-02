@@ -34,9 +34,9 @@ public class Informer extends jade.core.Agent {
     public void setup(){
 
         //TODO USE SUBSCRIPTION INITIATOR AND RESPONDER FOR COM
-        System.out.println("Agent Informer Created");
+        //System.out.println("Agent Informer Created");
 
-        calendar = new GregorianCalendar(1980,11,25);
+        calendar = new GregorianCalendar(2000,11,25);
         currentDate = calendar.getTime();
 
         limitDate= new GregorianCalendar(2016,0,25).getTime();
@@ -64,19 +64,36 @@ public class Informer extends jade.core.Agent {
         ServiceDescription sd2 = new ServiceDescription();
         sd2.setType("investor");
         template.addServices(sd2);
+        int nInv = 0;
         try {
             DFAgentDescription[] result = DFService.search(this, template);
             System.out.println("Found the following investor agents:");
             investorAgents = new ArrayList<AID>();
-            for (int i = 0; i < result.length; ++i) {
-                investorAgents.add(result[i].getName());
-                System.out.println(investorAgents.get(i).getName() + "  -  " + result.length);
+            for (nInv = 0; nInv < result.length; ++nInv) {
+                investorAgents.add(result[nInv].getName());
+                System.out.println(investorAgents.get(nInv).getName() + "  -  " + investorAgents.size());
             }
         }
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
-
+/*
+        DFAgentDescription template2 = new DFAgentDescription();
+        ServiceDescription sd3 = new ServiceDescription();
+        sd3.setType("player");
+        template2.addServices(sd3);
+        try {
+            DFAgentDescription[] result = DFService.search(this, template2);
+            System.out.println("Found the following player agents:");
+            for (int i = 0; i < result.length; ++i) {
+                investorAgents.add(result[i].getName());
+                System.out.println(investorAgents.get(i+nInv).getName() + "  -  " + investorAgents.size());
+            }
+        }
+        catch (FIPAException fe) {
+            fe.printStackTrace();
+        }
+*/
         addBehaviour(new InformerAnnouncement());
 
     }
@@ -89,7 +106,7 @@ public class Informer extends jade.core.Agent {
             fe.printStackTrace();
         }
         // Printout a dismissal message
-        System.out.println("Informer "+getAID().getName()+" terminating.");
+        //System.out.println("Informer "+getAID().getName()+" terminating.");
     }
 
     private DayValue getCompanyDayValue(String companyID, Date day){
@@ -100,7 +117,7 @@ public class Informer extends jade.core.Agent {
 
 
     private void setCompaniesMap(){
-        String csvDir = "src/MarketCaps2.csv";
+        String csvDir = "resources/caps/MarketCaps2.csv";
         BufferedReader br = null;
         String marketCapLine = "";
         String csvSplitBy = ",";
@@ -110,7 +127,6 @@ public class Informer extends jade.core.Agent {
             br = new BufferedReader(new FileReader(csvDir));
             while ((marketCapLine = br.readLine()) != null) {
                 String[] marketCapData = marketCapLine.split(csvSplitBy);
-                System.out.println("Parsed " + marketCapData[0] + " data");
 
                 String csvDirComp = "resources/historicalData/daily/" + marketCapData[0] + "_dailyInfo.csv";
                 BufferedReader brComp = null;
@@ -147,6 +163,8 @@ public class Informer extends jade.core.Agent {
                     map.put(marketCapData[0] , internalHash);
                     mapKeys.add(marketCapData[0]);
                     brComp.close();
+
+                    System.out.println("Parsed " + marketCapData[0] + " data");
 
                 }
                 catch (Exception e){

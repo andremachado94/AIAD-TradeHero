@@ -17,17 +17,14 @@ import java.util.*;
 /**
  * Created by andremachado on 26/10/2016.
  */
-public class Investor extends jade.core.Agent {
+public class Investor extends InvestorAgent {
 
     ArrayList<Company> companies;
 
     private ArrayList<AID> followers = new ArrayList<AID>();
 
-    private AID[] informerAgents;
-    private boolean infoReceived = true;
     private Date currentDate;
-    private Date limitDate;
-    private GregorianCalendar calendar;
+
 
     private Portfolio portfolio;
 
@@ -35,7 +32,8 @@ public class Investor extends jade.core.Agent {
 
     private int investmentType = 0;
 
-
+    private double day = 0;
+    InvestmentChart chart;
 
     public void createPortfolio() {
         portfolio = new Portfolio();
@@ -50,6 +48,10 @@ public class Investor extends jade.core.Agent {
 
         investmentType = inv;
 
+        chart =  new InvestmentChart(this.getName());
+
+
+        chart.openPanel();
 
         // Register the book-selling service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
@@ -63,6 +65,8 @@ public class Investor extends jade.core.Agent {
         } catch (FIPAException fe) {
             fe.printStackTrace();
         }
+
+        //new InvestmentChart(this.getName()).setVisible(true);
 
         createPortfolio();
 
@@ -118,7 +122,7 @@ public class Investor extends jade.core.Agent {
             ACLMessage msg = myAgent.receive(mt);
             if (msg != null && msg.getConversationId().equals("rate-req")) {
                 // INFORM Message received. Process it
-                String str = msg.getContent();
+                //String str = msg.getContent();
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.INFORM);
                 reply.setContent("" + (portfolio.getPortfolioValue() + portfolio.getCurrentCapital())/1000000.0);
@@ -174,8 +178,11 @@ public class Investor extends jade.core.Agent {
                 if (data[0] != null) {
                     // Received the date
                     currentDate = processReceivedMessage(str);
+
+                    chart.addData(day, portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
+                    day+=1;
                     portfolio.update();
-                  //  System.out.println(this.getAgent().getName() + ": Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+                    //System.out.println(this.getAgent().getName() + ": Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);
                 } else {
@@ -225,15 +232,20 @@ public class Investor extends jade.core.Agent {
 
                 if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0 && portfolio.getCurrentCapital() > portfolio.getCurrentCapital()/100){
                     portfolio.buyShare(company, n, date);
-                    addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," +dateToString(date)  + "," + company.getLastClose()));
-                    //System.out.println("Bought" + n + "shares from " + company.getCompanyId() + " @" + date);
+                    addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
+                    System.out.println("\nBought" + n + "shares from " + company.getCompanyId() + " @" + date);
+                    System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+
                     return;
                 }
 
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
                     portfolio.sellShare(company, n, date);
-                    addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," +dateToString(date)  + "," + company.getLastClose()));
+                    System.out.println("\nSold" + n + "shares from " + company.getCompanyId() + " @" + date);
+                    System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
+
+                    addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }
 
         }

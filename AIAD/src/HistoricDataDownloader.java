@@ -13,7 +13,7 @@ public class HistoricDataDownloader {
 
     public HistoricDataDownloader() {
 
-        String csvDir = "src/MarketCaps.csv";
+        String csvDir = "resources/caps/MarketCaps2.csv";
         BufferedReader br = null;
         String marketCapLine = "";
         String csvSplitBy = ",";
@@ -21,11 +21,9 @@ public class HistoricDataDownloader {
         try {
             br = new BufferedReader(new FileReader(csvDir));
             int i=0;
-            while((marketCapLine = br.readLine()) != null){
+            while((marketCapLine = br.readLine()) != null) {
                 i++;
                 String[] marketCapData = marketCapLine.split(csvSplitBy);
-
-                System.out.println("Exporting file number\t" + i);
 
                 Calendar start = new GregorianCalendar(1800, 1, 1);
                 Calendar end = new GregorianCalendar(2020, 1, 1);
@@ -39,20 +37,21 @@ public class HistoricDataDownloader {
                         "&f=" + end.get(Calendar.YEAR) +
                         "&g=d&ignore=.csv";
 
+                String splitInfoUrl = "http://chart.finance.yahoo.com/x?s=" + marketCapData[0] +
+                        "&a=" + start.get(Calendar.MONTH) +
+                        "&b=" + start.get(Calendar.DAY_OF_MONTH) +
+                        "&c=" + start.get(Calendar.YEAR) +
+                        "&d=" + end.get(Calendar.MONTH) +
+                        "&e=" + end.get(Calendar.DAY_OF_MONTH) +
+                        "&f=" + end.get(Calendar.YEAR) +
+                        "&g=v&y=0&z=30000&ignore=.csv";
+
+                boolean hasSplit = false;
 
                 try {
-                    URL yahooFin = new URL(url);
-                    URLConnection data = yahooFin.openConnection();
-                    Scanner input = new Scanner(data.getInputStream());
-
-                    String csv = "resources/historicalData/daily/" + marketCapData[0] + "_dailyInfo.csv";
-
-                    //try {
-                        FileWriter wr = new FileWriter(csv);
-                   // }
-                    //catch (Exception e){
-                     //   System.err.println("ERR: " + e);
-                    //}
+                    URL yahooFinSplit = new URL(splitInfoUrl);
+                    URLConnection splitData = yahooFinSplit.openConnection();
+                    Scanner input = new Scanner(splitData.getInputStream());
 
 
                     if (input.hasNext())
@@ -60,21 +59,66 @@ public class HistoricDataDownloader {
 
                     while (input.hasNextLine()) {
                         String line = input.nextLine();
+                        String[] info = line.split(",");
 
-                        try {
-                            wr.append(line);
-                            wr.append("\n");
-                        }
-                        catch (Exception e){
-                            System.err.println("ERR: " + e);
+                        if (info.length > 0) {
+                            if (info[0].equals("SPLIT")) {
+                                hasSplit = true;
+                                break;
+                            }
                         }
 
                     }
+
+                    input.close();
+
 
                 } catch (Exception e) {
                     System.err.println("ERR: " + e);
                 }
 
+
+                if (!hasSplit)
+                {
+
+                    System.out.println("Exporting file number\t" + i);
+
+                    try {
+                        URL yahooFin = new URL(url);
+                        URLConnection data = yahooFin.openConnection();
+                        Scanner input = new Scanner(data.getInputStream());
+
+                        String csv = "resources/historicalData/daily/" + marketCapData[0] + "_dailyInfo.csv";
+
+                        //try {
+                        FileWriter wr = new FileWriter(csv);
+                        // }
+                        //catch (Exception e){
+                        //   System.err.println("ERR: " + e);
+                        //}
+
+
+                        if (input.hasNext())
+                            input.nextLine();
+
+                        while (input.hasNextLine()) {
+                            String line = input.nextLine();
+
+                            try {
+                                wr.append(line);
+                                wr.append("\n");
+                            } catch (Exception e) {
+                                System.err.println("ERR: " + e);
+                            }
+
+                        }
+
+                        wr.close();
+
+                    } catch (Exception e) {
+                        System.err.println("ERR: " + e);
+                    }
+            }
 
             }
 

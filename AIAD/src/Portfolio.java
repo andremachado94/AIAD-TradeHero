@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public class Portfolio extends Investment{
 
-    private static double initialCapital = 1000000.00;
+    private static double initialCapital = 1000.00;
 
     private static String currencyUsed = "USD";
     private double currentCapital;

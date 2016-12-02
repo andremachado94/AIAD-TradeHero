@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * Created by andremachado on 21/11/2016.
  */
-public class Player extends  jade.core.Agent {
+public class Player extends InvestorAgent {
 
 
     private AID[] investorAgents;
@@ -31,6 +31,7 @@ public class Player extends  jade.core.Agent {
 
     private double n=0;
 
+    InvestmentChart chart;
 
     public void setup() {
 
@@ -47,6 +48,10 @@ public class Player extends  jade.core.Agent {
         } catch (FIPAException fe) {
             fe.printStackTrace();
         }
+
+
+        chart =  new InvestmentChart(this.getName());
+        chart.openPanel();
 
 
         DFAgentDescription template = new DFAgentDescription();
@@ -183,14 +188,15 @@ public class Player extends  jade.core.Agent {
                 String[] info = msg.getContent().split(",");
                 if(info.length == 4){
                     if(info[0].equals("buy")){
-
+                        portfolio.buyShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                     }
                     else if(info[0].equals("sell")){
-
+                        portfolio.sellShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                     }
                     else{
                         System.out.println("Invalid Suggestion msg - 1");
                     }
+                    System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
                 }
                 else{
                     System.out.println("Invalid Suggestion msg - 2");
@@ -336,5 +342,15 @@ public class Player extends  jade.core.Agent {
                 return;
             }
         }
+    }
+
+    private Date stringToDate(String info) {
+        String[] dateInfo = info.split("-");
+
+        return new GregorianCalendar(
+                Integer.parseInt(dateInfo[0]),
+                Integer.parseInt(dateInfo[1]),
+                Integer.parseInt(dateInfo[2])
+        ).getTime();
     }
 }
