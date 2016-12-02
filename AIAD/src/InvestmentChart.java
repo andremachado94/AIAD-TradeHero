@@ -56,10 +56,10 @@ public class InvestmentChart extends JFrame{
         }
     }
 
-    public void addData(double x, double inv, double hol){
+    public void addData(double x, double sum, double inv, double hol){
 
-        s.add(x,inv+hol);
-        i.add(x,inv);
+        s.add(x, sum);
+        i.add(x, inv);
         h.add(x, hol);
     }
 

@@ -23,7 +23,6 @@ public class PlayerPortfolio {
 
     public void buyShare(String cmpId, double price, Date date){
         int n = (int)(currentCapital/(price*100));
-        System.out.println("Buy " + cmpId);
 
         if(!activeShares.containsKey(cmpId)){
             if(n>0) {
@@ -41,7 +40,6 @@ public class PlayerPortfolio {
     }
 
     public void sellShare(String cmpId, double price, Date date){
-        System.out.println("Sell " + cmpId);
         if(activeShares.containsKey(cmpId)){
             Share share = activeShares.get(cmpId);
             share.sell(date);

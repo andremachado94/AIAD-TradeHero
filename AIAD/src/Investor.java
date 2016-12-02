@@ -90,14 +90,7 @@ public class Investor extends InvestorAgent {
 
         public void action() {
 
-            //System.out.println("\n\n\n------------------------\nTrying to get company Info:\n------------------------\n\n");
-
-            // Send the information to all investors
-           // System.out.println(suggestion);
-
             if(followers.size() > 0) {
-                System.out.println("Suggesting a buy");
-                //System.out.println(suggestion);
                 ACLMessage cfp = new ACLMessage(ACLMessage.INFORM);
                 for (int i = 0; i < followers.size(); ++i) {
                     cfp.addReceiver(followers.get(i));
@@ -118,9 +111,6 @@ public class Investor extends InvestorAgent {
             MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
             ACLMessage msg = myAgent.receive(mt);
             if (msg != null && msg.getConversationId().equals("rate-req")) {
-                // INFORM Message received. Process it
-                //String str = msg.getContent();
-                System.out.println("RATE REQUESTED");
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.INFORM);
                 reply.setContent("" + (portfolio.getPortfolioValue() + portfolio.getCurrentCapital())/portfolio.getInitialCapital());
@@ -130,15 +120,11 @@ public class Investor extends InvestorAgent {
             else if (msg != null && msg.getConversationId().equals("follow-req")) {
                 // INFORM Message received. Process it
                 addFollower(msg.getSender());
-                //System.out.println(myAgent.getName() + " followers:");
-                //printFollowers();
                 // TODO Add to Followers
             }
             else if (msg != null && msg.getConversationId().equals("unfollow-req")) {
 
                 removeFollower(msg.getSender());
-                //System.out.println(myAgent.getName() + " followers:");
-                //printFollowers();
                 // TODO Remove from Followers
             }else {
                 block();
@@ -177,10 +163,9 @@ public class Investor extends InvestorAgent {
                     // Received the date
                     currentDate = processReceivedMessage(str);
 
-                    chart.addData(day, portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
+                    chart.addData(day, portfolio.getPortfolioValue() +portfolio.getCurrentCapital() ,portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
                     day+=1;
                     portfolio.update();
-                    //System.out.println(this.getAgent().getName() + ": Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);
                 } else {
@@ -232,19 +217,13 @@ public class Investor extends InvestorAgent {
                     portfolio.buyShare(company, n, date);
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
 
-                    //System.out.println("\nBought" + n + "shares from " + company.getCompanyId() + " @" + date);
-                    //System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
-
                     return;
                 }
 
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
-                    System.out.println(this.getName() + " sold " + n + " shares from " + company.getCompanyId() + " at " + company.getLastClose() + " each ");
 
                     portfolio.sellShare(company, n, date);
-                   // System.out.println("\nSold" + n + "shares from " + company.getCompanyId() + " @" + date);
-                    //System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");
 
                     addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }

@@ -36,10 +36,10 @@ public class Informer extends jade.core.Agent {
         //TODO USE SUBSCRIPTION INITIATOR AND RESPONDER FOR COM
         //System.out.println("Agent Informer Created");
 
-        calendar = new GregorianCalendar(2000,11,25);
+        calendar = new GregorianCalendar(1990,11,25);
         currentDate = calendar.getTime();
 
-        limitDate= new GregorianCalendar(2016,0,25).getTime();
+        limitDate= new GregorianCalendar(2016,11,1).getTime();
 
         setCompaniesMap();
 

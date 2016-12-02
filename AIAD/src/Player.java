@@ -26,6 +26,9 @@ public class Player extends InvestorAgent {
 
     private PlayerPortfolio portfolio = new PlayerPortfolio();
 
+    private ArrayList<Double> currentCapitalHistory = new ArrayList<>();
+    private ArrayList<Double> portfolioValueHistory = new ArrayList<>();
+
     private MessageTemplate mt=null; // The template to receive replies
     private int step = 0;
 
@@ -90,7 +93,6 @@ public class Player extends InvestorAgent {
                         //TODO
                         cfp.addReceiver(investorAgents[0]);
 
-                        System.out.println("REQUESTING RATE");
                         cfp.setContent("rate-request");
                         cfp.setConversationId("rate-req");
 
@@ -107,7 +109,6 @@ public class Player extends InvestorAgent {
                                 MessageTemplate.MatchPerformative(ACLMessage.INFORM));
                         ACLMessage reply = myAgent.receive(mm);
                         if (reply != null) {
-                            System.out.println("RECEIVED RATE - " + reply.getContent());
                             // Reply received
                             if (true) {
                                 double rate = Double.parseDouble(reply.getContent());
@@ -186,6 +187,36 @@ public class Player extends InvestorAgent {
 
     }
 
+    private void updateHistory(double currentCapital, double portfolioValue){
+        if(currentCapitalHistory.size() == 300){
+            currentCapitalHistory.remove(299);
+        }
+        if(portfolioValueHistory.size() == 300){
+            portfolioValueHistory.remove(299);
+        }
+
+        currentCapitalHistory.add(0,currentCapital);
+        portfolioValueHistory.add(0,portfolioValue);
+    }
+
+    public double getPortfolioValueHistoryMA(int num) {
+        int i;
+        double sum = 0;
+        for(i = 0 ; i < portfolioValueHistory.size() && i < num ; i++){
+            sum += portfolioValueHistory.get(i);
+        }
+        return sum/i;
+    }
+
+    public double getCurrentCapitalHistoryMA(int num) {
+        int i;
+        double sum = 0;
+        for(i = 0 ; i < currentCapitalHistory.size() && i < num ; i++){
+            sum += currentCapitalHistory.get(i);
+        }
+        return sum/i;
+    }
+
     private class SuggestionReceiver extends CyclicBehaviour {
         public void action() {
             if(newDay){
@@ -201,8 +232,6 @@ public class Player extends InvestorAgent {
                         if (info[0].equals("buy")) {
                             portfolio.buyShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                         } else if (info[0].equals("sell")) {
-                            System.out.println(myAgent.getName() + " sold " + "all" + " shares from " + info[1] + " at " + Double.parseDouble(info[2]) + " each");
-
                             portfolio.sellShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                         } else {
                             System.out.println("Invalid Suggestion msg - 1");
@@ -237,7 +266,8 @@ public class Player extends InvestorAgent {
                 if (data[0] != null) {
                     // Received the date
                     update(data);
-                    chart.addData(day, portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
+                    updateHistory(portfolio.getCurrentCapital(), portfolio.getPortfolioValue());
+                    chart.addData(day, portfolio.getCurrentCapital() + portfolio.getPortfolioValue() ,getPortfolioValueHistoryMA(250) ,getCurrentCapitalHistoryMA(250));
                     day+=1;
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);

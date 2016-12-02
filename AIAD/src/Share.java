@@ -41,7 +41,6 @@ public class Share {
 
 
     public void update(double price){
-        System.out.println("Updating " + companyId +"  "+ price);
         this.currentPrice = price;
     }
 
