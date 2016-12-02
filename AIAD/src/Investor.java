@@ -1,16 +1,12 @@
 import jade.core.AID;
-import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
-import jade.domain.FIPANames;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.proto.SubscriptionInitiator;
 
 import java.util.*;
 
@@ -26,7 +22,7 @@ public class Investor extends InvestorAgent {
     private Date currentDate;
 
 
-    private Portfolio portfolio;
+    private InvestorPortfolio portfolio;
 
     private HashMap<String, Company> knownInfo = new HashMap<>();
 
@@ -36,7 +32,7 @@ public class Investor extends InvestorAgent {
     InvestmentChart chart;
 
     public void createPortfolio() {
-        portfolio = new Portfolio();
+        portfolio = new InvestorPortfolio();
     }
 
     public void setup() {
@@ -232,9 +228,8 @@ public class Investor extends InvestorAgent {
             Investment investment = new Investment();
             int n;
 
-                if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0 && portfolio.getCurrentCapital() > portfolio.getCurrentCapital()/100){
+                if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0){
                     portfolio.buyShare(company, n, date);
-                    //System.out.println("Suggesting a buy");
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
 
                     //System.out.println("\nBought" + n + "shares from " + company.getCompanyId() + " @" + date);
@@ -245,6 +240,8 @@ public class Investor extends InvestorAgent {
 
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
+                    System.out.println(this.getName() + " sold " + n + " shares from " + company.getCompanyId() + " at " + company.getLastClose() + " each ");
+
                     portfolio.sellShare(company, n, date);
                    // System.out.println("\nSold" + n + "shares from " + company.getCompanyId() + " @" + date);
                     //System.out.println("Current Capital: " + portfolio.getCurrentCapital()+ "\t+\t" + portfolio.getPortfolioValue() + "\n");

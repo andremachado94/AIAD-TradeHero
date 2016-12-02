@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Created by andremachado on 01/11/2016.
  */
-public class Portfolio extends Investment{
+public class InvestorPortfolio extends Investment{
 
     private static double initialCapital = 1000.00;
 
@@ -18,7 +18,7 @@ public class Portfolio extends Investment{
 
 
 
-    public Portfolio(){
+    public InvestorPortfolio(){
         currentCapital = initialCapital;
     }
 
@@ -46,21 +46,23 @@ public class Portfolio extends Investment{
 
     public void sellShare(Company company, int amount, Date date){
         if(boughtShare(company.getCompanyId())) {
-            activeShares.get(company.getCompanyId());
-            double earnings = activeShares.get(company.getCompanyId()).getShareCurrentCost() * amount;
+            //activeShares.get(company.getCompanyId());
+
             if(activeShares.get(company.getCompanyId()).getAmount() == amount) {
+                double earnings = company.getLastClose() * amount;
                 //Remove from active
                 activeShares.get(company.getCompanyId()).sell(date);
                 soldShares.add(activeShares.get(company.getCompanyId()));
                 activeShares.remove(company.getCompanyId());
                // System.out.println("Sold 50 shares from " + company.getCompanyId() + " @" + date);
+                currentCapital+=earnings;
 
             }
             else{
                 //TODO
                 System.out.println("TODO: Compras parciais");
             }
-            currentCapital+=earnings;
+
         }
     }
 

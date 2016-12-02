@@ -194,18 +194,20 @@ public class Player extends InvestorAgent {
                 ACLMessage msg = myAgent.receive(templ);
                 if (msg != null) {
                     // INFORM Message received. Process it
-                    System.out.println("SUGGESTION RECEIVED");
+                  //  System.out.println("SUGGESTION RECEIVED");
                     String[] info = msg.getContent().split(",");
 
                     if (info.length == 4) {
                         if (info[0].equals("buy")) {
                             portfolio.buyShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                         } else if (info[0].equals("sell")) {
+                            System.out.println(myAgent.getName() + " sold " + "all" + " shares from " + info[1] + " at " + Double.parseDouble(info[2]) + " each");
+
                             portfolio.sellShare(info[1], Double.parseDouble(info[2]), stringToDate(info[3]));
                         } else {
                             System.out.println("Invalid Suggestion msg - 1");
                         }
-                        System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
+                     //   System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
                     } else {
                         System.out.println("Invalid Suggestion msg - 2");
                     }
