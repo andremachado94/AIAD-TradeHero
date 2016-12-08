@@ -25,6 +25,7 @@ public class Company{
     private ArrayList<Integer> last200volumes = new ArrayList<Integer>();
     private ArrayList<Double> signalLine = new ArrayList<Double>();
     private ArrayList<Double> macd = new ArrayList<Double>();
+    private ArrayList<Double> histogram = new ArrayList<Double>();
 
 
     public Company(String companyId, Date openDate){
@@ -44,8 +45,12 @@ public class Company{
             macd.remove(25);
         }
 
-        if(signalLine.size() == 2){
-            signalLine.remove(1);
+        if(signalLine.size() == 10){
+            signalLine.remove(9);
+        }
+
+        if(histogram.size() == 10){
+            histogram.remove(9);
         }
 
         last200closes.add(0, close);
@@ -59,6 +64,8 @@ public class Company{
         if(macd.size() >= 25){
             signalLine.add(0,getMACDMA(9));
         }
+        if(signalLine.size() > 0)
+            histogram.add(0, macd.get(0)-signalLine.get(0));
     }
 
     public double getMA(int n){
@@ -171,8 +178,18 @@ public class Company{
     public double getSignal() {
         return signalLine.get(0);
     }
+    public ArrayList<Double> getSignalLine() {
+        return signalLine;
+    }
 
     public double getPreviousSignal() {
         return signalLine.get(1);
+    }
+
+    public double getHistogram(int n){
+        if(histogram.size() > n)
+            return histogram.get(n);
+
+        return  0;
     }
 }

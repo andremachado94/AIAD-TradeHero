@@ -9,18 +9,12 @@ import java.util.HashMap;
  */
 public class InvestorPortfolio extends Investment{
 
-    private static double initialCapital = 1000.00;
+    private double initialCapital;
 
     private static String currencyUsed = "USD";
     private double currentCapital;
     private HashMap<String,Share> activeShares = new HashMap<String,Share>();
     private ArrayList<Share> soldShares = new ArrayList<Share>();
-
-
-
-    public InvestorPortfolio(){
-        currentCapital = initialCapital;
-    }
 
     public void update(){
         for (String key: activeShares.keySet()) {
@@ -34,9 +28,9 @@ public class InvestorPortfolio extends Investment{
 
     public void buyShare(Company company, int amount, Date date){
         Share share = new Share(company, amount, company.getLastClose(), date);
-        if(share.getShareCost() <= currentCapital) {
+        if(amount*company.getLastClose() <= currentCapital) {
             activeShares.put(company.getCompanyId(), share);
-            currentCapital-=share.getShareCost();
+            currentCapital-=(company.getLastClose()*amount);
         }
     }
 
@@ -83,6 +77,9 @@ public class InvestorPortfolio extends Investment{
         return initialCapital;
     }
 
-
+    public void setInitialCapital(double initialCapital) {
+        this.initialCapital = initialCapital;
+        currentCapital = initialCapital;
+    }
 
 }

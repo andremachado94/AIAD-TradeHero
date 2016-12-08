@@ -13,7 +13,7 @@ public class HistoricDataDownloader {
 
     public HistoricDataDownloader() {
 
-        String csvDir = "resources/caps/MarketCaps2.csv";
+        String csvDir = "resources/caps/MarketCapsAll.csv";
         BufferedReader br = null;
         String marketCapLine = "";
         String csvSplitBy = ",";
@@ -101,8 +101,20 @@ public class HistoricDataDownloader {
                         if (input.hasNext())
                             input.nextLine();
 
+                        boolean firstLine = true;
+
                         while (input.hasNextLine()) {
                             String line = input.nextLine();
+
+                            if(firstLine){
+                                if(!line.startsWith("2016-12-07")) {
+                                    System.out.println(marketCapData[0] + " is dead");
+                                    break;
+                                }
+                                else
+                                    firstLine = false;
+                            }
+
 
                             try {
                                 wr.append(line);

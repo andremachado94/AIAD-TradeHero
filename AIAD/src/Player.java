@@ -76,12 +76,15 @@ public class Player extends InvestorAgent {
         addBehaviour(new TickerBehaviour(this, 200) {
             protected void onTick() {
 
+                Random rn = new Random();
+                int invIndex =  rn.nextInt(investorAgents.length);
+
                 switch (step) {
                     case 0:
                         // Request success rate to a random investor
                         ACLMessage cfp = new ACLMessage(ACLMessage.REQUEST);
                         //TODO
-                        cfp.addReceiver(investorAgents[0]);
+                        cfp.addReceiver(investorAgents[invIndex]);
 
                         cfp.setContent("rate-request");
                         cfp.setConversationId("rate-req");
@@ -131,7 +134,7 @@ public class Player extends InvestorAgent {
                     case 2:
                         ACLMessage cfp3 = new ACLMessage(ACLMessage.REQUEST);
                         //TODO
-                        cfp3.addReceiver(investorAgents[0]);
+                        cfp3.addReceiver(investorAgents[invIndex]);
 
                         cfp3.setContent("follow-request");
                         cfp3.setConversationId("follow-req");
@@ -145,7 +148,7 @@ public class Player extends InvestorAgent {
                         System.out.println(myAgent.getName() + ": Hey, quero seguir-te");
 
                         //TODO
-                        follow(investorAgents[0]);
+                        follow(investorAgents[invIndex]);
 
                         step = 0;
 
@@ -153,7 +156,7 @@ public class Player extends InvestorAgent {
                     case 3:
                         ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
                         //TODO
-                        cfp2.addReceiver(investorAgents[0]);
+                        cfp2.addReceiver(investorAgents[invIndex]);
 
                         cfp2.setContent("unfollow-request");
                         cfp2.setConversationId("unfollow-req");
@@ -167,7 +170,7 @@ public class Player extends InvestorAgent {
                         System.out.println(myAgent.getName() + ": Hey, cheiras mal e já não gosto de ti");
 
                         //TODO
-                        unfollow(investorAgents[0]);
+                        unfollow(investorAgents[invIndex]);
                         step = 0;
                         break;
                 }
@@ -228,7 +231,7 @@ public class Player extends InvestorAgent {
                     // Received the date
                     update(data);
                     updateHistory(portfolio.getCurrentCapital(), portfolio.getPortfolioValue());
-                    chart.addData(day, portfolio.getCurrentCapital() + portfolio.getPortfolioValue() ,getPortfolioValueHistoryMA(250) ,getCurrentCapitalHistoryMA(250));
+                    chart.addData(stringToDate(data[0]), portfolio.getCurrentCapital() + portfolio.getPortfolioValue() ,getPortfolioValueHistoryMA(250) ,getCurrentCapitalHistoryMA(250));
                     day+=1;
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);

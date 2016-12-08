@@ -36,7 +36,7 @@ public class Informer extends jade.core.Agent {
         //TODO USE SUBSCRIPTION INITIATOR AND RESPONDER FOR COM
         //System.out.println("Agent Informer Created");
 
-        calendar = new GregorianCalendar(1990,11,25);
+        calendar = new GregorianCalendar(2006,0,1);
         currentDate = calendar.getTime();
 
         limitDate= new GregorianCalendar(2016,11,1).getTime();
@@ -117,7 +117,7 @@ public class Informer extends jade.core.Agent {
 
 
     private void setCompaniesMap(){
-        String csvDir = "resources/caps/MarketCaps2.csv";
+        String csvDir = "resources/caps/MarketCaps.csv";
         BufferedReader br = null;
         String marketCapLine = "";
         String csvSplitBy = ",";

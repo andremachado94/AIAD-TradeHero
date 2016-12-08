@@ -1,6 +1,7 @@
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -22,30 +23,50 @@ public class Investor extends InvestorAgent {
     private Date currentDate;
 
 
-    private InvestorPortfolio portfolio;
+    private InvestorPortfolio portfolio = new InvestorPortfolio();
 
     private HashMap<String, Company> knownInfo = new HashMap<>();
 
-    private int investmentType = 0;
+    private int investmentType = 3;
 
+    private InvestorForm form;
 
-    public void createPortfolio() {
-        portfolio = new InvestorPortfolio();
-    }
+    private boolean infoValid = false;
+
+    private int totalMA = 1;
+    private int capitMA = 1;
+    private int investMA = 1;
+
+    private int investAmount = 100;
+
 
     public void setup() {
 
         System.out.println("Agent Investor Created");
 
-        Object[] args = getArguments();
-        int inv = Integer.parseInt(args[0].toString());
-
-        investmentType = inv;
-
         chart =  new InvestmentChart(this.getName());
-
-
         chart.openPanel();
+
+        form = new InvestorForm();
+        addBehaviour(new TickerBehaviour(this, 200) {
+            @Override
+            protected void onTick() {
+                if ((form.isCancelOpt() ^ form.isFormValid()) && !infoValid) {
+                    if (form.isFormValid()) {
+                        System.out.println("Form info received");
+                        investmentType = form.getInvestementType();
+                        totalMA = form.getTotalMA();
+                        investMA = form.getInvestedMA();
+                        capitMA = form.getCapitalMA();
+                        portfolio.setInitialCapital(form.getInitialCapital());
+                        investAmount = form.getInvestementAmount();
+                        infoValid = true;
+                    } else if (form.isCancelOpt()) {
+                        myAgent.doDelete();
+                    }
+                }
+            }
+        });
 
         // Register the book-selling service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
@@ -60,10 +81,6 @@ public class Investor extends InvestorAgent {
             fe.printStackTrace();
         }
 
-        //new InvestmentChart(this.getName()).setVisible(true);
-
-        createPortfolio();
-
         addBehaviour(new dataReceiver());
         addBehaviour(new manageFollowers());
     }
@@ -76,7 +93,28 @@ public class Investor extends InvestorAgent {
         }
         // Printout a dismissal message
         System.out.println("Investor " + getAID().getName() + " terminating.");
+
+        form.dispose();
+        chart.dispose();
+
     }
+
+
+        private void addFollower(AID follower){
+            if(!followers.contains(follower))
+                followers.add(follower);
+        }
+
+        private void removeFollower(AID follower){
+            if(followers.contains(follower))
+                followers.remove(follower);
+        }
+
+        private void printFollowers(){
+            for(int i = 0 ; i < followers.size() ; i++){
+                System.out.println(followers.get(i).getName());
+            }
+        }
 
     private class SuggestCompany extends OneShotBehaviour {
 
@@ -160,8 +198,9 @@ public class Investor extends InvestorAgent {
                 if (data[0] != null) {
                     // Received the date
                     currentDate = processReceivedMessage(str);
+                    updateHistory(portfolio.getCurrentCapital(), portfolio.getPortfolioValue());
 
-                    chart.addData(day, portfolio.getPortfolioValue() +portfolio.getCurrentCapital() ,portfolio.getPortfolioValue() ,portfolio.getCurrentCapital());
+                    chart.addData(currentDate, getPortfolioValueHistoryMA(totalMA) + getCurrentCapitalHistoryMA(totalMA) ,getPortfolioValueHistoryMA(investMA) ,getCurrentCapitalHistoryMA(capitMA));
                     day+=1;
                     portfolio.update();
                     reply.setPerformative(ACLMessage.CONFIRM);
@@ -211,18 +250,23 @@ public class Investor extends InvestorAgent {
             Investment investment = new Investment();
             int n;
 
-                if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/100)) > 0){
+                if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/investAmount)) > 0){
                     portfolio.buyShare(company, n, date);
+                    System.out.println("|\t" + date + "\t|\tBuy \t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
+                    //System.out.println("Capital: " + portfolio.getCurrentCapital() + " USD\nShares: " + portfolio.getPortfolioValue() + " USD\n");
 
                     return;
                 }
 
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
+                    System.out.println("|\t" + date + "\t|\tSell\t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
 
                     portfolio.sellShare(company, n, date);
-
+                   // if(n * company.getLastClose() > 1000000) System.out.println("WARNING: @" + company.getCompanyId());
+                    //System.out.println(date + ": Sell " + n + " of " + company.getCompanyId() + " @" + company.getLastClose());
+                    //System.out.println("Capital: " + portfolio.getCurrentCapital() + " USD\nShares: " + portfolio.getPortfolioValue() + " USD\n");
                     addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }
 
