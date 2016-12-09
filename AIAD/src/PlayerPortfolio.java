@@ -20,6 +20,11 @@ public class PlayerPortfolio {
         currentCapital = initialCapital;
     }
 
+    public void setInitialCapital(double initialCapital) {
+        this.initialCapital = initialCapital;
+        currentCapital = initialCapital;
+    }
+
 
     public void buyShare(String cmpId, double price, Date date){
         int n = (int)(currentCapital/(price*100));

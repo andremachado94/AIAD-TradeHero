@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Created by andremachado on 26/10/2016.
  */
 public class HistoricDataDownloader {
-    //http://chart.finance.yahoo.com/table.csv?s=IBM&a=9&b=7&c=2011&d=9&e=7&f=2016&g=d&ignore=.csv
 
     public HistoricDataDownloader() {
 
@@ -90,13 +89,7 @@ public class HistoricDataDownloader {
 
                         String csv = "resources/historicalData/daily/" + marketCapData[0] + "_dailyInfo.csv";
 
-                        //try {
                         FileWriter wr = new FileWriter(csv);
-                        // }
-                        //catch (Exception e){
-                        //   System.err.println("ERR: " + e);
-                        //}
-
 
                         if (input.hasNext())
                             input.nextLine();

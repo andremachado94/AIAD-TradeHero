@@ -28,7 +28,6 @@ public class Informer extends jade.core.Agent {
 
 
     private ArrayList<AID> investorAgents;
-    //private AID[] playerAgents;
 
 
     public void setup(){
@@ -105,8 +104,6 @@ public class Informer extends jade.core.Agent {
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
-        // Printout a dismissal message
-        //System.out.println("Informer "+getAID().getName()+" terminating.");
     }
 
     private DayValue getCompanyDayValue(String companyID, Date day){
@@ -117,7 +114,7 @@ public class Informer extends jade.core.Agent {
 
 
     private void setCompaniesMap(){
-        String csvDir = "resources/caps/MarketCaps.csv";
+        String csvDir = "resources/caps/MarketCapsAll.csv";
         BufferedReader br = null;
         String marketCapLine = "";
         String csvSplitBy = ",";
@@ -208,8 +205,6 @@ public class Informer extends jade.core.Agent {
         }
 
         public void action() {
-
-            //System.out.println("\n\n\n------------------------\nTrying to get company Info:\n------------------------\n\n");
 
             boolean[] replyConfirmations = new boolean[investorAgents.size()];
 

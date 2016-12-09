@@ -112,8 +112,6 @@ public class InvestorForm extends JFrame {
     }
 
     private void close(){
-      //  WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-      //  frame.dispatchEvent(winClosingEvent);
         frame.setVisible(false);
     }
 

@@ -16,12 +16,9 @@ import java.util.*;
  */
 public class Investor extends InvestorAgent {
 
-    ArrayList<Company> companies;
-
     private ArrayList<AID> followers = new ArrayList<AID>();
 
     private Date currentDate;
-
 
     private InvestorPortfolio portfolio = new InvestorPortfolio();
 
@@ -30,14 +27,6 @@ public class Investor extends InvestorAgent {
     private int investmentType = 3;
 
     private InvestorForm form;
-
-    private boolean infoValid = false;
-
-    private int totalMA = 1;
-    private int capitMA = 1;
-    private int investMA = 1;
-
-    private int investAmount = 100;
 
 
     public void setup() {
@@ -68,7 +57,6 @@ public class Investor extends InvestorAgent {
             }
         });
 
-        // Register the book-selling service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
@@ -254,19 +242,15 @@ public class Investor extends InvestorAgent {
                     portfolio.buyShare(company, n, date);
                     System.out.println("|\t" + date + "\t|\tBuy \t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
-                    //System.out.println("Capital: " + portfolio.getCurrentCapital() + " USD\nShares: " + portfolio.getPortfolioValue() + " USD\n");
 
                     return;
                 }
 
-                else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company)){
+                else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company, portfolio.getShare(company.getCompanyId()).getBoughtPrice())){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
                     System.out.println("|\t" + date + "\t|\tSell\t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
 
                     portfolio.sellShare(company, n, date);
-                   // if(n * company.getLastClose() > 1000000) System.out.println("WARNING: @" + company.getCompanyId());
-                    //System.out.println(date + ": Sell " + n + " of " + company.getCompanyId() + " @" + company.getLastClose());
-                    //System.out.println("Capital: " + portfolio.getCurrentCapital() + " USD\nShares: " + portfolio.getPortfolioValue() + " USD\n");
                     addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }
 

@@ -36,16 +36,13 @@ public class InvestmentChart extends JFrame{
     TimeSeries s = new TimeSeries("Total");
     TimeSeries h = new TimeSeries("Holding");
     TimeSeries i = new TimeSeries("Invested");
-
-
-    final static int LINEAR = 1;
-    final static int TIMESERIES = 6;
-
+    
     public InvestmentChart(String agentName){
         super(agentName);
         this.agentName = agentName;
 
         chart = ChartFactory.createTimeSeriesChart(agentName,tx,ty,data,true,true,true);
+
     }
 
     public void addData(Date date, double sum, double inv, double hol){
@@ -60,6 +57,7 @@ public class InvestmentChart extends JFrame{
         data.addSeries(s);
         data.addSeries(i);
         data.addSeries(h);
+
         return new ChartPanel(chart);
 
     }

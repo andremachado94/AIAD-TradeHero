@@ -29,6 +29,9 @@ public class Player extends InvestorAgent {
 
     boolean newDay = true;
 
+    private PlayerForm form;
+
+
     public void setup() {
 
         System.out.println("Agent Player Created");
@@ -49,6 +52,28 @@ public class Player extends InvestorAgent {
         chart =  new InvestmentChart(this.getName());
         chart.openPanel();
 
+        form = new PlayerForm();
+        addBehaviour(new TickerBehaviour(this, 200) {
+            @Override
+            protected void onTick() {
+                if ((form.isCancelOpt() ^ form.isFormValid()) && !infoValid) {
+                    if (form.isFormValid()) {
+                        System.out.println("Form info received");
+                        totalMA = form.getTotalMA();
+                        investMA = form.getInvestedMA();
+                        capitMA = form.getCapitalMA();
+                        portfolio.setInitialCapital(form.getInitialCapital());
+                        investAmount = form.getInvestementAmount();
+                        trustLimit = form.getInvestementThreshold();
+                        infoValid = true;
+                    } else if (form.isCancelOpt()) {
+                        chart.dispose();
+                        myAgent.doDelete();
+                    }
+                }
+            }
+        });
+
 
         DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd2 = new ServiceDescription();
@@ -68,8 +93,11 @@ public class Player extends InvestorAgent {
             fe.printStackTrace();
         }
 
-        Object[] args = getArguments();
-        trustLimit = Double.parseDouble(args[0].toString());
+        if(investorAgents == null || investorAgents.length == 0){
+            form.close();
+            chart.dispose();
+            this.doDelete();
+        }
 
         addBehaviour(new dataReceiver());
         addBehaviour(new SuggestionReceiver());
@@ -112,7 +140,7 @@ public class Player extends InvestorAgent {
                                     }
                                     else{
                                         step = 0;
-                                       // System.out.println("Já estou a seguir");
+                                       // Já está a seguir
                                     }
 
                                 }
@@ -123,7 +151,7 @@ public class Player extends InvestorAgent {
                                     }
                                     else{
                                         step = 0;
-                                       // System.out.println("Não sigo nem tenho interesse");
+                                       // Nao tem interesse em seguir
                                     }
                                 }
                             }
@@ -133,7 +161,6 @@ public class Player extends InvestorAgent {
                         break;
                     case 2:
                         ACLMessage cfp3 = new ACLMessage(ACLMessage.REQUEST);
-                        //TODO
                         cfp3.addReceiver(investorAgents[invIndex]);
 
                         cfp3.setContent("follow-request");
@@ -145,9 +172,8 @@ public class Player extends InvestorAgent {
                         mt = MessageTemplate.and(MessageTemplate.MatchConversationId("follow-req"),
                                 MessageTemplate.MatchInReplyTo(cfp3.getReplyWith()));
 
-                        System.out.println(myAgent.getName() + ": Hey, quero seguir-te");
+                        System.out.println(myAgent.getName() + ": Follow Request send to " + cfp3.getSender().getName());
 
-                        //TODO
                         follow(investorAgents[invIndex]);
 
                         step = 0;
@@ -155,7 +181,6 @@ public class Player extends InvestorAgent {
                         break;
                     case 3:
                         ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
-                        //TODO
                         cfp2.addReceiver(investorAgents[invIndex]);
 
                         cfp2.setContent("unfollow-request");
@@ -167,9 +192,8 @@ public class Player extends InvestorAgent {
                         mt = MessageTemplate.and(MessageTemplate.MatchConversationId("unfollow-req"),
                                 MessageTemplate.MatchInReplyTo(cfp2.getReplyWith()));
 
-                        System.out.println(myAgent.getName() + ": Hey, cheiras mal e já não gosto de ti");
+                        System.out.println(myAgent.getName() + ": Unfollow Request send to " + cfp2.getSender().getName());
 
-                        //TODO
                         unfollow(investorAgents[invIndex]);
                         step = 0;
                         break;
@@ -231,7 +255,7 @@ public class Player extends InvestorAgent {
                     // Received the date
                     update(data);
                     updateHistory(portfolio.getCurrentCapital(), portfolio.getPortfolioValue());
-                    chart.addData(stringToDate(data[0]), portfolio.getCurrentCapital() + portfolio.getPortfolioValue() ,getPortfolioValueHistoryMA(250) ,getCurrentCapitalHistoryMA(250));
+                    chart.addData(stringToDate(data[0]), getPortfolioValueHistoryMA(totalMA) +getCurrentCapitalHistoryMA(totalMA) ,getPortfolioValueHistoryMA(investMA) ,getCurrentCapitalHistoryMA(capitMA));
                     day+=1;
                     reply.setPerformative(ACLMessage.CONFIRM);
                     reply.setContent(data[0]);

@@ -40,7 +40,6 @@ public class InvestorPortfolio extends Investment{
 
     public void sellShare(Company company, int amount, Date date){
         if(boughtShare(company.getCompanyId())) {
-            //activeShares.get(company.getCompanyId());
 
             if(activeShares.get(company.getCompanyId()).getAmount() == amount) {
                 double earnings = company.getLastClose() * amount;
@@ -48,15 +47,9 @@ public class InvestorPortfolio extends Investment{
                 activeShares.get(company.getCompanyId()).sell(date);
                 soldShares.add(activeShares.get(company.getCompanyId()));
                 activeShares.remove(company.getCompanyId());
-               // System.out.println("Sold 50 shares from " + company.getCompanyId() + " @" + date);
                 currentCapital+=earnings;
 
             }
-            else{
-                //TODO
-                System.out.println("TODO: Compras parciais");
-            }
-
         }
     }
 

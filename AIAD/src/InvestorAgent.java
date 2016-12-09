@@ -14,6 +14,15 @@ public class InvestorAgent extends jade.core.Agent {
 
     protected double day = 0;
 
+
+    protected boolean infoValid = false;
+
+    protected int totalMA = 1;
+    protected int capitMA = 1;
+    protected int investMA = 1;
+
+    protected int investAmount = 100;
+
     protected void updateHistory(double currentCapital, double portfolioValue){
         if(currentCapitalHistory.size() == 300){
             currentCapitalHistory.remove(299);

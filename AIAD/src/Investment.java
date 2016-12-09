@@ -71,7 +71,7 @@ public class Investment {
 
     }
 
-    public boolean shouldSell(int type, Company company){
+    public boolean shouldSell(int type, Company company, double boughtPrice){
         if(company == null || !company.haveEnoughInfo())
             return false;
 
@@ -81,7 +81,7 @@ public class Investment {
             case 1:
                 return MACDInvestmentSell(company);
             case 2:
-                return InvertedMACDInvestmentSell(company);
+                return InvertedMACDInvestmentSell(company, boughtPrice);
             case 3:
                 return RandomInvestmentSell();
             default:
@@ -122,7 +122,6 @@ public class Investment {
 
     }
 
-
     private int RandomInvestmentBuy(Company company, double investMoney) {
 
         Random rn = new Random();
@@ -148,7 +147,6 @@ public class Investment {
 
     }
 
-
     private int InvertedMACDInvestmentBuy(Company company, double investMoney) {
 
         double signalLineToday = company.getSignal();
@@ -165,7 +163,7 @@ public class Investment {
         return  0;
     }
 
-    private boolean InvertedMACDInvestmentSell(Company company) {
+    private boolean InvertedMACDInvestmentSell(Company company, double boughtPrice) {
         double signalLineToday = company.getSignal();
 
         double macdToday = company.getMACD();
@@ -174,7 +172,7 @@ public class Investment {
 
         double slope = getHistogramSlope(company);
 
-        if(slope >= -0.05 && slope <= 0.05 && histogramToday <= 0)
+        if(slope >= -0.05 && slope <= 0.05 && histogramToday <= 0 && company.getLastClose() > boughtPrice)
             return true;
         return false;
 
@@ -182,16 +180,6 @@ public class Investment {
     }
 
     private int RSIInvestmentBuy(Company company, double investMoney){
-
-        /*
-        double movAva200 = company.getMA(200);
-        double movAva50 = company.getMA(50);
-        double high200 = company.getHighs(200);
-        double high50 = company.getHighs(50);
-        double low200 = company.getLows(200);
-        double low50 = company.getLows(50);
-        double todayClose = company.getLastClose();
-        */
 
         double relativeStrengthIndex = getRSI(company);
 
