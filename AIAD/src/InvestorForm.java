@@ -12,7 +12,7 @@ import java.util.Hashtable;
  */
 public class InvestorForm extends JFrame {
 
-    String[] investmentTypes = new String[] {"RSI", "MACD", "Inv. MACD", "Random"};
+    String[] investmentTypes = new String[] {"RSI", "MACD", "Safe MACD", "Random"};
     private final int N_INV = 4;
 
     private JPanel FormMainPanel;

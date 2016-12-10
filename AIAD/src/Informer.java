@@ -62,7 +62,7 @@ public class Informer extends jade.core.Agent {
 
                         executionStarted = true;
                         startAgent();
-                        //calendar = new GregorianCalendar(form.getDate());
+
                     } else if (form.isCancelOpt()) {
                         myAgent.doDelete();
                     }
@@ -130,12 +130,6 @@ public class Informer extends jade.core.Agent {
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
-    }
-
-    private DayValue getCompanyDayValue(String companyID, Date day){
-
-        return (map.containsKey(companyID) && map.get(companyID).containsKey(day)) ? map.get(companyID).get(day) : null;
-
     }
 
 
@@ -264,8 +258,6 @@ public class Informer extends jade.core.Agent {
                             // Reply received
                             if (reply.getPerformative() == ACLMessage.CONFIRM) {
 
-                                //System.out.println("Received reply from " + reply.getSender().getName());
-
                                 for (int i = 0; i < investorAgents.size(); ++i) {
                                     if(investorAgents.get(i).equals(reply.getSender()) && reply.getContent().equals(dateToString(currentDate))){
                                         replyConfirmations[i] = true;
@@ -299,17 +291,6 @@ public class Informer extends jade.core.Agent {
         }
     }
 
-
-
-    private Date stringToDate(String info){
-            String[] dateInfo = info.split("-");
-
-            return new GregorianCalendar(
-                            Integer.parseInt(dateInfo[0]),
-                            Integer.parseInt(dateInfo[1]),
-                            Integer.parseInt(dateInfo[2])
-                    ).getTime();
-    }
 
 
     private String dateToString(Date date){

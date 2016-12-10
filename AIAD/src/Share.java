@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
  */
 public class Share {
 
-    private boolean active;
+
     private Company company;
     private String companyId;
     private int amount;
@@ -24,7 +24,6 @@ public class Share {
         this.amount = amount;
         this.boughtPrice = sharePrice;
         this.currentPrice = sharePrice;
-        this.active = true;
 
         this.dateBought = date;
     }
@@ -34,7 +33,7 @@ public class Share {
         this.amount = amount;
         this.boughtPrice = sharePrice;
         this.currentPrice = sharePrice;
-        this.active = true;
+
 
         this.dateBought = date;
     }
@@ -52,37 +51,12 @@ public class Share {
         return amount;
     }
 
-    public double getSharePrice() {
-        return currentPrice;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
     public void sell(Date date) {
-        this.active = false;
         this.dateSold = date;
     }
 
     public double getShareCost() {
         return amount*currentPrice;
-    }
-
-    public double getShareCurrentCost(){
-        return currentPrice;
-    }
-
-    public Date getDateBought() {
-        return dateBought;
-    }
-
-    public Date getDateSold() {
-        return dateSold;
-    }
-
-    public double getSoldPrice() {
-        return soldPrice;
     }
 
     public double getBoughtPrice() {

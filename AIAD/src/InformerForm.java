@@ -93,10 +93,6 @@ public class InformerForm extends JFrame{
         frame.setVisible(false);
     }
 
-    public static void main(String[] args) {
-        InformerForm f = new InformerForm();
-    }
-
     public class DateLabelFormatter extends AbstractFormatter {
 
         private String datePattern = "yyyy-MM-dd";

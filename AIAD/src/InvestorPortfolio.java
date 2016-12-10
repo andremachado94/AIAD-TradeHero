@@ -11,7 +11,6 @@ public class InvestorPortfolio extends Investment{
 
     private double initialCapital;
 
-    private static String currencyUsed = "USD";
     private double currentCapital;
     private HashMap<String,Share> activeShares = new HashMap<String,Share>();
     private ArrayList<Share> soldShares = new ArrayList<Share>();

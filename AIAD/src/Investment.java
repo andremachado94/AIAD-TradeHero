@@ -16,29 +16,13 @@ public class Investment {
             case 1:
                 return MACDInvestmentBuy(company, investMoney);
             case 2:
-                return InvertedMACDInvestmentBuy(company, investMoney);
+                return MACDInvestmentBuy(company, investMoney);
             case 3:
                 return RandomInvestmentBuy(company, investMoney);
             default:
                 return -1;
         }
 
-    }
-
-    private double getSignalSlope(Company company){
-        double sumx=0;
-        double sumy=0;
-        double sumxSq=0;
-        double sumxy=0;
-        for(int x = 1 ; x < 7 ; x++){
-            double y = company.getSignalLine().get(x-1);
-            sumy += y;
-            sumx += x;
-            sumxSq += x*x;
-            sumxy += x*y;
-        }
-
-        return (6*sumxy - sumx*sumy)/(6*sumxSq - sumx*sumx);
     }
 
     private double getHistogramSlope(Company company){
@@ -81,7 +65,7 @@ public class Investment {
             case 1:
                 return MACDInvestmentSell(company);
             case 2:
-                return InvertedMACDInvestmentSell(company, boughtPrice);
+                return SafeMACDInvestmentSell(company, boughtPrice);
             case 3:
                 return RandomInvestmentSell();
             default:
@@ -147,23 +131,7 @@ public class Investment {
 
     }
 
-    private int InvertedMACDInvestmentBuy(Company company, double investMoney) {
-
-        double signalLineToday = company.getSignal();
-
-        double macdToday = company.getMACD();
-
-        double histogramToday = macdToday - signalLineToday;
-
-        double slope = getHistogramSlope(company);
-        if(slope >= -0.05 && slope <= 0.05 && histogramToday > 0){
-            double shareValue = company.getLastClose();
-            return (int)(investMoney / shareValue);
-        }
-        return  0;
-    }
-
-    private boolean InvertedMACDInvestmentSell(Company company, double boughtPrice) {
+    private boolean SafeMACDInvestmentSell(Company company, double boughtPrice) {
         double signalLineToday = company.getSignal();
 
         double macdToday = company.getMACD();

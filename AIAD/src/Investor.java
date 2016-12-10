@@ -87,23 +87,6 @@ public class Investor extends InvestorAgent {
 
     }
 
-
-        private void addFollower(AID follower){
-            if(!followers.contains(follower))
-                followers.add(follower);
-        }
-
-        private void removeFollower(AID follower){
-            if(followers.contains(follower))
-                followers.remove(follower);
-        }
-
-        private void printFollowers(){
-            for(int i = 0 ; i < followers.size() ; i++){
-                System.out.println(followers.get(i).getName());
-            }
-        }
-
     private class SuggestCompany extends OneShotBehaviour {
 
         private String suggestion;
@@ -142,14 +125,10 @@ public class Investor extends InvestorAgent {
                 myAgent.send(reply);
             }
             else if (msg != null && msg.getConversationId().equals("follow-req")) {
-                // INFORM Message received. Process it
                 addFollower(msg.getSender());
-                // TODO Add to Followers
             }
             else if (msg != null && msg.getConversationId().equals("unfollow-req")) {
-
                 removeFollower(msg.getSender());
-                // TODO Remove from Followers
             }else {
                 block();
             }
@@ -165,11 +144,6 @@ public class Investor extends InvestorAgent {
                 followers.remove(follower);
         }
 
-        private void printFollowers(){
-            for(int i = 0 ; i < followers.size() ; i++){
-                System.out.println(followers.get(i).getName());
-            }
-        }
     }
 
     private class dataReceiver extends CyclicBehaviour {
@@ -240,7 +214,8 @@ public class Investor extends InvestorAgent {
 
                 if(!portfolio.boughtShare(company.getCompanyId()) && (n = investment.investAmount(investmentType,company,portfolio.getCurrentCapital()/investAmount)) > 0){
                     portfolio.buyShare(company, n, date);
-                    System.out.println("|\t" + date + "\t|\tBuy \t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
+                    //Uncomment for printing the investment Log
+                    //System.out.println("|\t" + date + "\t|\tBuy \t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
                     addBehaviour(new SuggestCompany("buy," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
 
                     return;
@@ -248,8 +223,8 @@ public class Investor extends InvestorAgent {
 
                 else if(portfolio.boughtShare(company.getCompanyId()) && investment.shouldSell(investmentType, company, portfolio.getShare(company.getCompanyId()).getBoughtPrice())){
                     n = portfolio.getShare(company.getCompanyId()).getAmount();
-                    System.out.println("|\t" + date + "\t|\tSell\t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
-
+                    //Uncomment for printing the investment Log
+                    //System.out.println("|\t" + date + "\t|\tSell\t|\t" + company.getCompanyId() + "\t|\t" + n + "\t|\t" + company.getLastClose() + "\t|");
                     portfolio.sellShare(company, n, date);
                     addBehaviour(new SuggestCompany("sell," + company.getCompanyId() + "," + company.getLastClose() + "," +dateToString(date)));
                 }

@@ -111,7 +111,6 @@ public class Player extends InvestorAgent {
                     case 0:
                         // Request success rate to a random investor
                         ACLMessage cfp = new ACLMessage(ACLMessage.REQUEST);
-                        //TODO
                         cfp.addReceiver(investorAgents[invIndex]);
 
                         cfp.setContent("rate-request");
@@ -212,8 +211,6 @@ public class Player extends InvestorAgent {
                         MessageTemplate.MatchPerformative(ACLMessage.INFORM));
                 ACLMessage msg = myAgent.receive(templ);
                 if (msg != null) {
-                    // INFORM Message received. Process it
-                  //  System.out.println("SUGGESTION RECEIVED");
                     String[] info = msg.getContent().split(",");
 
                     if (info.length == 4) {
@@ -224,7 +221,6 @@ public class Player extends InvestorAgent {
                         } else {
                             System.out.println("Invalid Suggestion msg - 1");
                         }
-                     //   System.out.println("Wallet :\t" + portfolio.getPortfolioValue());
                     } else {
                         System.out.println("Invalid Suggestion msg - 2");
                     }
@@ -274,7 +270,6 @@ public class Player extends InvestorAgent {
                 //close - 1
             for(int i = 1 ; i < data.length ; i++){
                 String[] info = data[i].split(",");
-                //TODO Meter esta merda direito
                 if(info.length > 2)
                      portfolio.update(info[0], Double.parseDouble(info[1]));
             }
@@ -292,107 +287,7 @@ public class Player extends InvestorAgent {
         System.out.println("Player " + getAID().getName() + " terminating.");
     }
 
-/*
-    private class InvestorCommunication extends TickerBehaviour {
 
-
-        public void onTick() {
-
-            MessageTemplate mt; // The template to receive replies
-            int step = 0;
-
-            switch (step) {
-                case 0:
-                    // Request success rate to a random investor
-                    ACLMessage cfp = new ACLMessage(ACLMessage.REQUEST);
-                    //TODO
-                    cfp.addReceiver(investorAgents[0]);
-
-                    cfp.setContent("rate-request");
-                    cfp.setConversationId("rate-req");
-
-                    cfp.setReplyWith("ratereq" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp);
-                    // Prepare the template to get confirmations
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("rate-req"),
-                            MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
-                    step = 1;
-                    break;
-                case 1:
-                    // Check if investor received the information
-                    ACLMessage reply = myAgent.receive(mt);
-                    if (reply != null) {
-                        // Reply received
-                        if (reply.getPerformative() == ACLMessage.INFORM && reply.getConversationId().equals("rate-req")) {
-                            double rate = Double.parseDouble(reply.getContent());
-                            if(rate > 0.5){
-                                if(!isFollowing(reply.getSender()))
-                                    step = 2;
-                                else{
-                                    step = 0;
-                                    System.out.println("Já estou a seguir");
-                                }
-
-                            }
-                            else{
-                                if(isFollowing(reply.getSender()))
-                                    step = 3;
-                                else{
-                                    step = 0;
-                                    System.out.println("Não sigo nem tenho interesse");
-                                }
-                            }
-                        }
-                    } else {
-                        block();
-                    }
-                    break;
-                case 2:
-                    ACLMessage cfp3 = new ACLMessage(ACLMessage.REQUEST);
-                    //TODO
-                    cfp3.addReceiver(investorAgents[0]);
-
-                    cfp3.setContent("follow-request");
-                    cfp3.setConversationId("follow-req");
-
-                    cfp3.setReplyWith("followreq" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp3);
-                    // Prepare the template to get confirmations
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("follow-req"),
-                            MessageTemplate.MatchInReplyTo(cfp3.getReplyWith()));
-
-                    System.out.println("Hey, quero seguir-te");
-
-                    //TODO
-                    follow(investorAgents[0]);
-
-                    step = 0;
-
-                    break;
-                case 3:
-                    ACLMessage cfp2 = new ACLMessage(ACLMessage.REQUEST);
-                    //TODO
-                    cfp2.addReceiver(investorAgents[0]);
-
-                    cfp2.setContent("unfollow-request");
-                    cfp2.setConversationId("unfollow-req");
-
-                    cfp2.setReplyWith("unfollowreq" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp2);
-                    // Prepare the template to get confirmations
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("unfollow-req"),
-                            MessageTemplate.MatchInReplyTo(cfp2.getReplyWith()));
-
-                    System.out.println("Hey, cheiras mal e já não gosto de ti");
-
-                    //TODO
-                    unfollow(investorAgents[0]);
-                    step = 0;
-                    break;
-            }
-        }
-    }
-*/
     private boolean isFollowing(AID sender) {
         for (int i = 0 ; i < following.size() ; i++){
             if(following.get(i).equals(sender))

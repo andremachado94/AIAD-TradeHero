@@ -146,4 +146,9 @@ public class HistoricDataDownloader {
 
 
     }
+
+    public static void main(String [] args){
+
+        HistoricDataDownloader h = new HistoricDataDownloader();
+    }
 }
