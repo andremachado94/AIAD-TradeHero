@@ -22,105 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerForm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PlayerForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="104" column="10" selection-start-line="104" selection-start-column="10" selection-end-line="104" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#setSlidersLabel#0;class#PlayerForm#0" expanded="false" />
-                <element signature="method#setSlidersLabelListeners#0;class#PlayerForm#0" expanded="false" />
-                <element signature="e#5939#5940#0" expanded="true" />
-                <element signature="e#5976#5977#0" expanded="true" />
-                <element signature="e#6017#6018#0" expanded="true" />
-                <element signature="e#6057#6058#0" expanded="true" />
-                <element signature="e#6088#6089#0" expanded="true" />
-                <element signature="e#6118#6119#0" expanded="true" />
-                <element signature="e#6152#6153#0" expanded="true" />
-                <element signature="e#6185#6186#0" expanded="true" />
-                <element signature="e#6218#6219#0" expanded="true" />
-                <element signature="e#6250#6251#0" expanded="true" />
-                <element signature="e#6297#6298#0" expanded="true" />
-                <element signature="e#6340#6341#0" expanded="true" />
-                <element signature="e#6376#6377#0" expanded="true" />
-                <element signature="e#6408#6409#0" expanded="true" />
-                <element signature="e#6444#6445#0" expanded="true" />
-                <element signature="e#6476#6477#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerForm.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PlayerForm.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="212" column="51" selection-start-line="212" selection-start-column="51" selection-end-line="212" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#takeDown#0;class#Player#0" expanded="false" />
-                <marker date="1481295471000" expanded="false" signature="11727:15818" ph="{...}" />
-                <marker date="1481295471000" expanded="false" signature="11760:15812" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InvestorPortfolio.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/InvestorPortfolio.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="745">
-              <caret line="75" column="5" selection-start-line="72" selection-start-column="4" selection-end-line="75" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerPortfolio.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PlayerPortfolio.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Investment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Investment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
-              <folding>
-                <element signature="method#investAmount#0;class#Investment#0" expanded="false" />
-                <element signature="method#getSignalSlope#0;class#Investment#0" expanded="false" />
-                <element signature="method#getHistogramSlope#0;class#Investment#0" expanded="false" />
-                <element signature="method#getRSI#0;class#Investment#0" expanded="false" />
-                <element signature="method#MACDInvestmentBuy#0;class#Investment#0" expanded="false" />
-                <element signature="method#MACDInvestmentSell#0;class#Investment#0" expanded="false" />
-                <element signature="method#RandomInvestmentBuy#0;class#Investment#0" expanded="false" />
-                <element signature="method#RandomInvestmentSell#0;class#Investment#0" expanded="false" />
-                <element signature="method#InvertedMACDInvestmentBuy#0;class#Investment#0" expanded="false" />
-                <element signature="method#RSIInvestmentBuy#0;class#Investment#0" expanded="false" />
-                <element signature="method#RSIInvestmentSell#0;class#Investment#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Investor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Investor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="258" column="1" selection-start-line="258" selection-start-column="1" selection-end-line="258" selection-end-column="1" />
+            <state relative-caret-position="285">
+              <caret line="57" column="11" selection-start-line="38" selection-start-column="8" selection-end-line="57" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#SuggestCompany#0;class#Investor#0" expanded="false" />
@@ -132,25 +38,103 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvestmentChart.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InvestmentChart.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/InvestmentChart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
+            <state relative-caret-position="255">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Informer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="InformerForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InformerForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2414#2415#0" expanded="true" />
+                <element signature="e#2441#2442#0" expanded="true" />
+                <element signature="e#2467#2468#0" expanded="true" />
+                <element signature="e#2506#2507#0" expanded="true" />
+                <element signature="e#2552#2553#0" expanded="true" />
+                <element signature="e#2603#2604#0" expanded="true" />
+                <element signature="e#3284#3285#0" expanded="true" />
+                <element signature="e#3316#3317#0" expanded="true" />
+                <element signature="e#3352#3353#0" expanded="true" />
+                <element signature="e#3384#3385#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PlayerForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="84" column="28" selection-start-line="83" selection-start-column="20" selection-end-line="84" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3294#3295#0" expanded="true" />
+                <element signature="e#3333#3334#0" expanded="true" />
+                <element signature="method#setSlidersLabel#0;class#PlayerForm#0" expanded="false" />
+                <element signature="method#setSlidersLabelListeners#0;class#PlayerForm#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvestorForm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InvestorForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="47" column="29" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#setComboBoxLabels#0;class#InvestorForm#0" expanded="false" />
+                <element signature="method#setSlidersLabel#0;class#InvestorForm#0" expanded="false" />
+                <element signature="method#setSlidersLabelListeners#0;class#InvestorForm#0" expanded="false" />
+                <element signature="method#setInvestementType#0;class#InvestorForm#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InformerForm.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InformerForm.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Informer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Informer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="115" column="35" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
+            <state relative-caret-position="2670">
+              <caret line="316" column="15" selection-start-line="316" selection-start-column="15" selection-end-line="316" selection-end-column="15" />
               <folding>
                 <element signature="method#allConfirmed#0;class#InformerAnnouncement#0;class#Informer#0" expanded="false" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerForm.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PlayerForm.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -205,13 +189,15 @@
         <option value="$PROJECT_DIR$/src/InvestorForm.java" />
         <option value="$PROJECT_DIR$/src/InvestorAgent.java" />
         <option value="$PROJECT_DIR$/src/PlayerPortfolio.java" />
-        <option value="$PROJECT_DIR$/src/Informer.java" />
         <option value="$PROJECT_DIR$/src/PlayerForm.form" />
-        <option value="$PROJECT_DIR$/src/PlayerForm.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Investment.java" />
         <option value="$PROJECT_DIR$/src/Investor.java" />
         <option value="$PROJECT_DIR$/src/InvestmentChart.java" />
+        <option value="$PROJECT_DIR$/src/PlayerForm.java" />
+        <option value="$PROJECT_DIR$/src/InformerForm.form" />
+        <option value="$PROJECT_DIR$/src/InformerForm.java" />
+        <option value="$PROJECT_DIR$/src/Informer.java" />
       </list>
     </option>
   </component>
@@ -222,6 +208,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="21" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="709" />
@@ -318,23 +305,9 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AIAD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AIAD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="historicalData" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="InformerForm" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -347,11 +320,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AIAD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AIAD" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="caps" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -365,12 +348,12 @@
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar!/" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jdatepicker-1.3.4.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="296" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="57" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="213" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -837,30 +820,30 @@
       <workItem from="1478535063638" duration="12000" />
       <workItem from="1478539344825" duration="38381000" />
       <workItem from="1479392267475" duration="108360000" />
-      <workItem from="1480932001474" duration="48996000" />
+      <workItem from="1480932001474" duration="57858000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="320657000" />
+    <option name="totallyTimeSpent" value="329519000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="709" extended-state="1" />
-    <editor active="true" />
+    <frame x="21" y="23" width="1280" height="709" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.39499193" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.40306947" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.60500807" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.5969305" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419773" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17447495" sideWeight="0.8106904" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17447495" sideWeight="0.8106904" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.49676898" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24935289" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -940,10 +923,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/TSEM_dailyInfo.csv" />
-    <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/AAAP_dailyInfo.csv" />
-    <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/ABIL_dailyInfo.csv" />
-    <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/ACAD_dailyInfo.csv" />
     <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/AKER_dailyInfo.csv" />
     <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/FHB_dailyInfo.csv" />
     <entry file="file://$PROJECT_DIR$/resources/historicalData/daily/GSUM_dailyInfo.csv" />
@@ -1080,14 +1059,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ANN.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1120,14 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HistoricDataDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1763">
@@ -1152,70 +1115,6 @@
             <element signature="method#dateToString#0;class#InvestorAgent#0" expanded="false" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/InvestorForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1027">
-          <caret line="81" column="30" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3269#3270#0" expanded="true" />
-            <element signature="e#3308#3309#0" expanded="true" />
-            <element signature="method#setComboBoxLabels#0;class#InvestorForm#0" expanded="false" />
-            <element signature="method#setSlidersLabel#0;class#InvestorForm#0" expanded="false" />
-            <element signature="method#setSlidersLabelListeners#0;class#InvestorForm#0" expanded="false" />
-            <element signature="method#setInvestementType#0;class#InvestorForm#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Informer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="115" column="35" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
-          <folding>
-            <element signature="method#allConfirmed#0;class#InformerAnnouncement#0;class#Informer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/InvestorForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PlayerForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="104" column="10" selection-start-line="104" selection-start-column="10" selection-end-line="104" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setSlidersLabel#0;class#PlayerForm#0" expanded="false" />
-            <element signature="method#setSlidersLabelListeners#0;class#PlayerForm#0" expanded="false" />
-            <element signature="e#5939#5940#0" expanded="true" />
-            <element signature="e#5976#5977#0" expanded="true" />
-            <element signature="e#6017#6018#0" expanded="true" />
-            <element signature="e#6057#6058#0" expanded="true" />
-            <element signature="e#6088#6089#0" expanded="true" />
-            <element signature="e#6118#6119#0" expanded="true" />
-            <element signature="e#6152#6153#0" expanded="true" />
-            <element signature="e#6185#6186#0" expanded="true" />
-            <element signature="e#6218#6219#0" expanded="true" />
-            <element signature="e#6250#6251#0" expanded="true" />
-            <element signature="e#6297#6298#0" expanded="true" />
-            <element signature="e#6340#6341#0" expanded="true" />
-            <element signature="e#6376#6377#0" expanded="true" />
-            <element signature="e#6408#6409#0" expanded="true" />
-            <element signature="e#6444#6445#0" expanded="true" />
-            <element signature="e#6476#6477#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PlayerForm.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Investment.java">
@@ -1278,10 +1177,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tesr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tesr.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InvestmentChart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InvestorForm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PlayerForm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InformerForm.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PlayerForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="84" column="28" selection-start-line="83" selection-start-column="20" selection-end-line="84" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3294#3295#0" expanded="true" />
+            <element signature="e#3333#3334#0" expanded="true" />
+            <element signature="method#setSlidersLabel#0;class#PlayerForm#0" expanded="false" />
+            <element signature="method#setSlidersLabelListeners#0;class#PlayerForm#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Investor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="258" column="1" selection-start-line="258" selection-start-column="1" selection-end-line="258" selection-end-column="1" />
+        <state relative-caret-position="285">
+          <caret line="57" column="11" selection-start-line="38" selection-start-column="8" selection-end-line="57" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#SuggestCompany#0;class#Investor#0" expanded="false" />
@@ -1292,11 +1257,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/InvestmentChart.java">
+    <entry file="file://$PROJECT_DIR$/src/InvestorForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="151">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setComboBoxLabels#0;class#InvestorForm#0" expanded="false" />
+            <element signature="method#setSlidersLabel#0;class#InvestorForm#0" expanded="false" />
+            <element signature="method#setSlidersLabelListeners#0;class#InvestorForm#0" expanded="false" />
+            <element signature="method#setInvestementType#0;class#InvestorForm#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InformerForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2441#2442#0" expanded="true" />
+            <element signature="e#2467#2468#0" expanded="true" />
+            <element signature="e#2506#2507#0" expanded="true" />
+            <element signature="e#2552#2553#0" expanded="true" />
+            <element signature="e#2603#2604#0" expanded="true" />
+            <element signature="e#3284#3285#0" expanded="true" />
+            <element signature="e#3316#3317#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#3384#3385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Informer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2670">
+          <caret line="316" column="15" selection-start-line="316" selection-start-column="15" selection-end-line="316" selection-end-column="15" />
+          <folding>
+            <element signature="method#allConfirmed#0;class#InformerAnnouncement#0;class#Informer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

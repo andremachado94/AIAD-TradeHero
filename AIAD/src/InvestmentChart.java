@@ -36,7 +36,7 @@ public class InvestmentChart extends JFrame{
     TimeSeries s = new TimeSeries("Total");
     TimeSeries h = new TimeSeries("Holding");
     TimeSeries i = new TimeSeries("Invested");
-    
+
     public InvestmentChart(String agentName){
         super(agentName);
         this.agentName = agentName;

@@ -29,18 +29,11 @@ public class Informer extends jade.core.Agent {
 
     private ArrayList<AID> investorAgents;
 
+    private InformerForm form;
+
+    private boolean executionStarted = false;
 
     public void setup(){
-
-        //TODO USE SUBSCRIPTION INITIATOR AND RESPONDER FOR COM
-        //System.out.println("Agent Informer Created");
-
-        calendar = new GregorianCalendar(2006,0,1);
-        currentDate = calendar.getTime();
-
-        limitDate= new GregorianCalendar(2016,11,1).getTime();
-
-        setCompaniesMap();
 
         // Register the informer service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
@@ -55,6 +48,40 @@ public class Informer extends jade.core.Agent {
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
+
+        form = new InformerForm();
+        addBehaviour(new TickerBehaviour(this, 1000) {
+            @Override
+            protected void onTick() {
+                if ((form.isCancelOpt() ^ form.isFormValid()) && !executionStarted) {
+                    if (form.isFormValid()) {
+                        System.out.println(form.getDate().toString());
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(form.getDate());
+                        calendar = new GregorianCalendar(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
+
+                        executionStarted = true;
+                        startAgent();
+                        //calendar = new GregorianCalendar(form.getDate());
+                    } else if (form.isCancelOpt()) {
+                        myAgent.doDelete();
+                    }
+                }
+
+            }
+        });
+
+
+
+
+    }
+
+    private void startAgent(){
+        currentDate = calendar.getTime();
+
+        limitDate= new GregorianCalendar(2016,11,1).getTime();
+
+        setCompaniesMap();
 
 
         // Search for all Investor Agents
@@ -94,7 +121,6 @@ public class Informer extends jade.core.Agent {
         }
 
         addBehaviour(new InformerAnnouncement());
-
     }
 
     public void takeDown(){
