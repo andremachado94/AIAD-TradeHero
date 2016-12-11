@@ -114,11 +114,6 @@ public class Player extends InvestorAgent {
         addBehaviour(new SuggestionReceiver());
         addBehaviour(new TickerBehaviour(this, 500) {
             protected void onTick() {
-/*
-                Random rn = new Random();
-                int invIndex =  rn.nextInt(investorAgents.length);
-*/
-
 
                 switch (step) {
                     case 0:
@@ -167,7 +162,6 @@ public class Player extends InvestorAgent {
                         Follower[] temp = fpq.getTop2();
                         for(int i = 0 ; i < 2 ; i++){
                             top[i] = temp[i];
-                           // System.out.println(top[i]);
                         }
                         replies = 0;
                         step = 2;
@@ -180,7 +174,6 @@ public class Player extends InvestorAgent {
                             if(top[i] != null && !isFollowing(investorAgents[top[i].getIndex()]) && top[i].getVal() >= trustLimit) {
                                 cfp3.addReceiver(investorAgents[top[i].getIndex()]);
                                 follow(investorAgents[top[i].getIndex()]);
-                                System.out.println("======================FOLLOW======================");
                             }
                             else if(top[i] == null) break;
                         }
@@ -214,7 +207,6 @@ public class Player extends InvestorAgent {
                             if(!found) {
                                 cfp2.addReceiver(following.get(i));
                                 unfollow(following.get(i));
-                                System.out.println("======================UNFOLLOW======================");
                             }
                         }
 

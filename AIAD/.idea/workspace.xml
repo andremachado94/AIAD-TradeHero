@@ -41,15 +41,15 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-195">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="-4085">
+              <caret line="115" column="37" selection-start-line="115" selection-start-column="37" selection-end-line="115" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#takeDown#0;class#Player#0" expanded="false" />
-                <element signature="e#14930#14931#0" expanded="true" />
-                <element signature="e#14966#14967#0" expanded="true" />
-                <element signature="e#15000#15001#0" expanded="true" />
-                <element signature="e#15034#15035#0" expanded="true" />
+                <element signature="e#14542#14543#0" expanded="true" />
+                <element signature="e#14578#14579#0" expanded="true" />
+                <element signature="e#14612#14613#0" expanded="true" />
+                <element signature="e#14646#14647#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -759,16 +759,16 @@
       <workItem from="1478535063638" duration="12000" />
       <workItem from="1478539344825" duration="38381000" />
       <workItem from="1479392267475" duration="108360000" />
-      <workItem from="1480932001474" duration="78514000" />
+      <workItem from="1480932001474" duration="78871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="350175000" />
+    <option name="totallyTimeSpent" value="350532000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -782,7 +782,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419773" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17447495" sideWeight="0.8106904" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17447495" sideWeight="0.8106904" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.49353796" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24935289" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1231,15 +1231,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="-4085">
+          <caret line="115" column="37" selection-start-line="115" selection-start-column="37" selection-end-line="115" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#takeDown#0;class#Player#0" expanded="false" />
-            <element signature="e#14930#14931#0" expanded="true" />
-            <element signature="e#14966#14967#0" expanded="true" />
-            <element signature="e#15000#15001#0" expanded="true" />
-            <element signature="e#15034#15035#0" expanded="true" />
+            <element signature="e#14542#14543#0" expanded="true" />
+            <element signature="e#14578#14579#0" expanded="true" />
+            <element signature="e#14612#14613#0" expanded="true" />
+            <element signature="e#14646#14647#0" expanded="true" />
           </folding>
         </state>
       </provider>
