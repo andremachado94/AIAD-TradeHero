@@ -22,10 +22,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Investor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Investor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Investor/Investor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
+            <state relative-caret-position="132">
               <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -33,6 +33,81 @@
                 <element signature="method#action#0;class#SuggestCompany#0;class#Investor#0" expanded="false" />
                 <element signature="class#manageFollowers#0;class#Investor#0" expanded="false" />
                 <marker date="1481396987000" expanded="true" signature="8074:8598" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Player/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-195">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#takeDown#0;class#Player#0" expanded="false" />
+                <element signature="e#14930#14931#0" expanded="true" />
+                <element signature="e#14966#14967#0" expanded="true" />
+                <element signature="e#15000#15001#0" expanded="true" />
+                <element signature="e#15034#15035#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerPortfolio.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Player/PlayerPortfolio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-135">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Investment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Investor/Investment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="157">
+              <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getHistogramSlope#0;class#Investment#0" expanded="false" />
+                <element signature="method#getRSI#0;class#Investment#0" expanded="false" />
+                <element signature="method#MACDInvestmentSell#0;class#Investment#0" expanded="false" />
+                <element signature="method#RandomInvestmentBuy#0;class#Investment#0" expanded="false" />
+                <element signature="method#RandomInvestmentSell#0;class#Investment#0" expanded="false" />
+                <element signature="method#SafeMACDInvestmentSell#0;class#Investment#0" expanded="false" />
+                <element signature="method#RSIInvestmentBuy#0;class#Investment#0" expanded="false" />
+                <element signature="method#RSIInvestmentSell#0;class#Investment#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvestorPortfolio.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Investor/InvestorPortfolio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+              <folding>
+                <element signature="e#411#426#0" expanded="true" />
+                <element signature="e#485#492#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Company.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Shared/Company.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-165">
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="40" />
+              <folding>
+                <element signature="method#getMA#0;class#Company#0" expanded="false" />
+                <element signature="method#getLows#0;class#Company#0" expanded="false" />
+                <element signature="method#getAvarageGain#0;class#Company#0" expanded="false" />
+                <element signature="method#haveEnoughInfo#0;class#Company#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -103,6 +178,7 @@
         <option value="$PROJECT_DIR$/src/Player/PlayerPortfolio.java" />
         <option value="$PROJECT_DIR$/src/Investor/InvestorAgent.java" />
         <option value="$PROJECT_DIR$/src/Investor/Investor.java" />
+        <option value="$PROJECT_DIR$/src/Player/Player.java" />
       </list>
     </option>
   </component>
@@ -113,7 +189,6 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="21" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="709" />
@@ -202,7 +277,27 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JadeGuiLaunch">
+  <component name="RunManager" selected="Application.Boot">
+    <configuration default="false" name="Boot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="Player.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="jade.Boot" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="-gui" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="AIAD" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -632,9 +727,15 @@
       <envs />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Application.JadeGuiLaunch" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Boot" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.Boot" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -658,25 +759,25 @@
       <workItem from="1478535063638" duration="12000" />
       <workItem from="1478539344825" duration="38381000" />
       <workItem from="1479392267475" duration="108360000" />
-      <workItem from="1480932001474" duration="63261000" />
+      <workItem from="1480932001474" duration="78514000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="334922000" />
+    <option name="totallyTimeSpent" value="350175000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="21" y="23" width="1280" height="709" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="709" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.48707592" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.4838449" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.40710825" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.411147" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.59289175" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228525" sideWeight="0.588853" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3419773" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1020,19 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shared/Company.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="method#getMA#0;class#Company#0" expanded="false" />
-            <element signature="method#getLows#0;class#Company#0" expanded="false" />
-            <element signature="method#getAvarageGain#0;class#Company#0" expanded="false" />
-            <element signature="method#haveEnoughInfo#0;class#Company#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Shared/DayValue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1049,35 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Informer/Informer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3928">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="method#allConfirmed#0;class#InformerAnnouncement#0;class#Informer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#takeDown#0;class#Player#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player/PlayerPortfolio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Investor/InvestorAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-590">
@@ -1088,20 +1147,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Investor/Investment.java">
+    <entry file="file://$PROJECT_DIR$/src/Shared/Share.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-773">
-          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        <state relative-caret-position="105">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Informer/Informer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getHistogramSlope#0;class#Investment#0" expanded="false" />
-            <element signature="method#getRSI#0;class#Investment#0" expanded="false" />
-            <element signature="method#MACDInvestmentSell#0;class#Investment#0" expanded="false" />
-            <element signature="method#RandomInvestmentBuy#0;class#Investment#0" expanded="false" />
-            <element signature="method#RandomInvestmentSell#0;class#Investment#0" expanded="false" />
-            <element signature="method#SafeMACDInvestmentSell#0;class#Investment#0" expanded="false" />
-            <element signature="method#RSIInvestmentBuy#0;class#Investment#0" expanded="false" />
-            <element signature="method#RSIInvestmentSell#0;class#Investment#0" expanded="false" />
+            <element signature="method#allConfirmed#0;class#InformerAnnouncement#0;class#Informer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/Company.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-165">
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="40" />
+          <folding>
+            <element signature="method#getMA#0;class#Company#0" expanded="false" />
+            <element signature="method#getLows#0;class#Company#0" expanded="false" />
+            <element signature="method#getAvarageGain#0;class#Company#0" expanded="false" />
+            <element signature="method#haveEnoughInfo#0;class#Company#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1117,17 +1189,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shared/Share.java">
+    <entry file="file://$PROJECT_DIR$/src/Investor/Investment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="157">
+          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getHistogramSlope#0;class#Investment#0" expanded="false" />
+            <element signature="method#getRSI#0;class#Investment#0" expanded="false" />
+            <element signature="method#MACDInvestmentSell#0;class#Investment#0" expanded="false" />
+            <element signature="method#RandomInvestmentBuy#0;class#Investment#0" expanded="false" />
+            <element signature="method#RandomInvestmentSell#0;class#Investment#0" expanded="false" />
+            <element signature="method#SafeMACDInvestmentSell#0;class#Investment#0" expanded="false" />
+            <element signature="method#RSIInvestmentBuy#0;class#Investment#0" expanded="false" />
+            <element signature="method#RSIInvestmentSell#0;class#Investment#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Investor/Investor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
+        <state relative-caret-position="132">
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1135,6 +1217,29 @@
             <element signature="method#action#0;class#SuggestCompany#0;class#Investor#0" expanded="false" />
             <element signature="class#manageFollowers#0;class#Investor#0" expanded="false" />
             <marker date="1481396987000" expanded="true" signature="8074:8598" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player/PlayerPortfolio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-135">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#takeDown#0;class#Player#0" expanded="false" />
+            <element signature="e#14930#14931#0" expanded="true" />
+            <element signature="e#14966#14967#0" expanded="true" />
+            <element signature="e#15000#15001#0" expanded="true" />
+            <element signature="e#15034#15035#0" expanded="true" />
           </folding>
         </state>
       </provider>
